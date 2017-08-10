@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="Artikls" EntityType="Model1.Store.Artikls" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Kupacs" EntityType="Model1.Store.Kupacs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Artikli_u_skladistu" EntityType="Model1.Store.Artikli_u_skladistu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Racuns" EntityType="Model1.Store.Racuns" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Stavka_racuna" EntityType="Model1.Store.Stavka_racuna" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ArtiklArtikli_u_skladistu" Association="Model1.Store.ArtiklArtikli_u_skladistu">
+      <End Role="Artikl" EntitySet="Artikls" />
+      <End Role="Artikli_u_skladistu" EntitySet="Artikli_u_skladistu" />
+    </AssociationSet>
+    <AssociationSet Name="RacunKupac" Association="Model1.Store.RacunKupac">
+      <End Role="Racun" EntitySet="Racuns" />
+      <End Role="Kupac" EntitySet="Kupacs" />
+    </AssociationSet>
+    <AssociationSet Name="RacunStavka_racuna" Association="Model1.Store.RacunStavka_racuna">
+      <End Role="Racun" EntitySet="Racuns" />
+      <End Role="Stavka_racuna" EntitySet="Stavka_racuna" />
+    </AssociationSet>
+    <AssociationSet Name="ArtiklStavka_racuna" Association="Model1.Store.ArtiklStavka_racuna">
+      <End Role="Artikl" EntitySet="Artikls" />
+      <End Role="Stavka_racuna" EntitySet="Stavka_racuna" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Artikls">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Datum" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Kupacs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OIB" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Dug" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Artikli_u_skladistu">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kolicina" Type="float" Nullable="false" />
+    <Property Name="Artikl_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Racuns">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Vrijeme" Type="datetime" Nullable="false" />
+    <Property Name="Kupac_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Stavka_racuna">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kolicina" Type="float" Nullable="false" />
+    <Property Name="Cijena" Type="decimal" Nullable="false" />
+    <Property Name="RacunID" Type="int" Nullable="false" />
+    <Property Name="ArtiklID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ArtiklArtikli_u_skladistu">
+    <End Role="Artikl" Type="Model1.Store.Artikls" Multiplicity="1" />
+    <End Role="Artikli_u_skladistu" Type="Model1.Store.Artikli_u_skladistu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artikl">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Artikli_u_skladistu">
+        <PropertyRef Name="Artikl_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RacunKupac">
+    <End Role="Racun" Type="Model1.Store.Racuns" Multiplicity="*" />
+    <End Role="Kupac" Type="Model1.Store.Kupacs" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Kupac">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Racun">
+        <PropertyRef Name="Kupac_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RacunStavka_racuna">
+    <End Role="Racun" Type="Model1.Store.Racuns" Multiplicity="1" />
+    <End Role="Stavka_racuna" Type="Model1.Store.Stavka_racuna" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Racun">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Stavka_racuna">
+        <PropertyRef Name="RacunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ArtiklStavka_racuna">
+    <End Role="Artikl" Type="Model1.Store.Artikls" Multiplicity="1" />
+    <End Role="Stavka_racuna" Type="Model1.Store.Stavka_racuna" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artikl">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Stavka_racuna">
+        <PropertyRef Name="ArtiklID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Artikls" EntityType="Model1.Artikl" />
+          <EntitySet Name="Kupacs" EntityType="Model1.Kupac" />
+          <EntitySet Name="Artikli_u_skladistu" EntityType="Model1.Artikli_u_skladistu" />
+          <AssociationSet Name="ArtiklArtikli_u_skladistu" Association="Model1.ArtiklArtikli_u_skladistu">
+            <End Role="Artikl" EntitySet="Artikls" />
+            <End Role="Artikli_u_skladistu" EntitySet="Artikli_u_skladistu" />
+          </AssociationSet>
+          <EntitySet Name="Racuns" EntityType="Model1.Racun" />
+          <AssociationSet Name="RacunKupac" Association="Model1.RacunKupac">
+            <End Role="Racun" EntitySet="Racuns" />
+            <End Role="Kupac" EntitySet="Kupacs" />
+          </AssociationSet>
+          <EntitySet Name="Stavka_racuna" EntityType="Model1.Stavka_racuna" />
+          <AssociationSet Name="RacunStavka_racuna" Association="Model1.RacunStavka_racuna">
+            <End Role="Racun" EntitySet="Racuns" />
+            <End Role="Stavka_racuna" EntitySet="Stavka_racuna" />
+          </AssociationSet>
+          <AssociationSet Name="ArtiklStavka_racuna" Association="Model1.ArtiklStavka_racuna">
+            <End Role="Artikl" EntitySet="Artikls" />
+            <End Role="Stavka_racuna" EntitySet="Stavka_racuna" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Artikl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Artikli_u_skladistu" Relationship="Model1.ArtiklArtikli_u_skladistu" FromRole="Artikl" ToRole="Artikli_u_skladistu" />
+          <NavigationProperty Name="Stavka_racuna" Relationship="Model1.ArtiklStavka_racuna" FromRole="Artikl" ToRole="Stavka_racuna" />
+        </EntityType>
+        <EntityType Name="Kupac">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" />
+          <Property Name="OIB" Type="String" Nullable="false" />
+          <Property Name="Dug" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="Racuns" Relationship="Model1.RacunKupac" FromRole="Kupac" ToRole="Racun" />
+        </EntityType>
+        <EntityType Name="Artikli_u_skladistu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kolicina" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Artikl" Relationship="Model1.ArtiklArtikli_u_skladistu" FromRole="Artikli_u_skladistu" ToRole="Artikl" />
+        </EntityType>
+        <Association Name="ArtiklArtikli_u_skladistu">
+          <End Type="Model1.Artikl" Role="Artikl" Multiplicity="1" />
+          <End Type="Model1.Artikli_u_skladistu" Role="Artikli_u_skladistu" Multiplicity="0..1" />
+        </Association>
+        <EntityType Name="Racun">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vrijeme" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Kupac" Relationship="Model1.RacunKupac" FromRole="Racun" ToRole="Kupac" />
+          <NavigationProperty Name="Stavka_racuna" Relationship="Model1.RacunStavka_racuna" FromRole="Racun" ToRole="Stavka_racuna" />
+        </EntityType>
+        <Association Name="RacunKupac">
+          <End Type="Model1.Racun" Role="Racun" Multiplicity="*" />
+          <End Type="Model1.Kupac" Role="Kupac" Multiplicity="0..1" />
+        </Association>
+        <EntityType Name="Stavka_racuna">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kolicina" Type="Double" Nullable="false" />
+          <Property Name="Cijena" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="Racun" Relationship="Model1.RacunStavka_racuna" FromRole="Stavka_racuna" ToRole="Racun" />
+          <Property Name="RacunID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Artikl" Relationship="Model1.ArtiklStavka_racuna" FromRole="Stavka_racuna" ToRole="Artikl" />
+          <Property Name="ArtiklID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="RacunStavka_racuna">
+          <End Type="Model1.Racun" Role="Racun" Multiplicity="1" />
+          <End Type="Model1.Stavka_racuna" Role="Stavka_racuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Racun">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stavka_racuna">
+              <PropertyRef Name="RacunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ArtiklStavka_racuna">
+          <End Type="Model1.Artikl" Role="Artikl" Multiplicity="1" />
+          <End Type="Model1.Stavka_racuna" Role="Stavka_racuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artikl">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Stavka_racuna">
+              <PropertyRef Name="ArtiklID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="Artikls">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Artikl)">
+        <MappingFragment StoreEntitySet="Artikls">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kupacs">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Kupac)">
+        <MappingFragment StoreEntitySet="Kupacs">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="OIB" ColumnName="OIB" />
+          <ScalarProperty Name="Dug" ColumnName="Dug" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Artikli_u_skladistu">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Artikli_u_skladistu)">
+        <MappingFragment StoreEntitySet="Artikli_u_skladistu">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Racuns">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Racun)">
+        <MappingFragment StoreEntitySet="Racuns">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Vrijeme" ColumnName="Vrijeme" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stavka_racuna">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Stavka_racuna)">
+        <MappingFragment StoreEntitySet="Stavka_racuna">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+          <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+          <ScalarProperty Name="RacunID" ColumnName="RacunID" />
+          <ScalarProperty Name="ArtiklID" ColumnName="ArtiklID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ArtiklArtikli_u_skladistu" TypeName="Model1.ArtiklArtikli_u_skladistu" StoreEntitySet="Artikli_u_skladistu">
+      <EndProperty Name="Artikl">
+        <ScalarProperty Name="ID" ColumnName="Artikl_ID" />
+      </EndProperty>
+      <EndProperty Name="Artikli_u_skladistu">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RacunKupac" TypeName="Model1.RacunKupac" StoreEntitySet="Racuns">
+      <EndProperty Name="Kupac">
+        <ScalarProperty Name="ID" ColumnName="Kupac_ID" />
+      </EndProperty>
+      <EndProperty Name="Racun">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="Kupac_ID" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
