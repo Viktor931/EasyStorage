@@ -23,6 +23,12 @@ namespace EasyStorage
             Kupci.Naziv = NazivKupcaTxtbx;
             Kupci.Dugovanje = DugovanjeTxtbx;
             Kupci.OIB = OIBTxtbx;
+            KreiranjeRacuna.DataGridViewStavkaRacuna = DataGridViewStavkaRacuna;
+            KreiranjeRacuna.ArtiklComboBox = ArtiklComboBox;
+            KreiranjeRacuna.KupacComboBox = KupacComboBox;
+            KreiranjeRacuna.CijenaTxtbx = CijenaTxtbx;
+            KreiranjeRacuna.KolicinaTxtbx = KolicinaStavkaTxtbx;
+
             tabControl1.SelectTab(0);
             Skladiste.DisplayData();
         }
@@ -35,6 +41,10 @@ namespace EasyStorage
             else if(e.TabPage.Text == "Kupci")
             {
                 Kupci.DisplayData();
+            }
+            else if(e.TabPage.Text == "Kreiranje Računa")
+            {
+                KreiranjeRacuna.DisplayData();
             }
         }
         //eventi za tab artikli
@@ -121,6 +131,46 @@ namespace EasyStorage
         private void DataGridViewKupci_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             DataGridViewKupci.ClearSelection();
+        }
+
+        //eventi za kreiranje racuna
+        private void DodajStavkuRacunaBtn_Click(object sender, EventArgs e)
+        {
+            KreiranjeRacuna.DodajStavku();
+        }
+
+        private void DataGridViewStavkaRacuna_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            DataGridViewStavkaRacuna.ClearSelection();
+        }
+
+        private void DataGridViewStavkaRacuna_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            KreiranjeRacuna.SelektiranRed = e.RowIndex;
+        }
+
+        private void PonistiStavkuRacunaBtn_Click(object sender, EventArgs e)
+        {
+            KreiranjeRacuna.PonistiStavku();
+        }
+
+        private void ArtiklComboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            ArtiklComboBox.DroppedDown = false;
+        }
+        private void KupacComboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            KupacComboBox.DroppedDown = false;
+        }
+
+        private void PonistiRacunBtn_Click(object sender, EventArgs e)
+        {
+            KreiranjeRacuna.Clear();
+        }
+
+        private void KreirajRacunBtn_Click(object sender, EventArgs e)
+        {
+            KreiranjeRacuna.KreirajRacun();
         }
     }
 }

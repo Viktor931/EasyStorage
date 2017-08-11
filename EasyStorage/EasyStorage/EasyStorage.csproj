@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KreiranjeRacuna.cs" />
     <Compile Include="Kupci.cs" />
     <Compile Include="MainFrm.cs">
       <SubType>Form</SubType>
