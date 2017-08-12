@@ -71,10 +71,14 @@ namespace EasyStorage
                     {
                         MessageBox.Show("Novokreirani kupac uvijek ima početno dugovanje 0, koristite opciju ažuriraj kako biste promjenili dugovanje!");
                     }
-                    cmd = new SqlCommand("INSERT INTO Kupacs(Naziv, OIB, Dug) VALUES(@Naziv, @OIB, 0)", con);
+                    cmd = new SqlCommand("INSERT INTO Kupacs(Naziv, OIB, Dug) OUTPUT INSERTED.ID VALUES(@Naziv, @OIB, 0)", con);
                     con.Open();
                     cmd.Parameters.AddWithValue("@Naziv", naziv.Text);
                     cmd.Parameters.AddWithValue("@OIB", oib.Text);
+                    int id = Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.CommandText = "INSERT INTO Promjena_dugovanja(KupacID, Iznos, Ukupno_dugovanje, Vrijeme, RacunID) VALUES(@KupacID, 0, 0, @Vrijeme, NULL)";
+                    cmd.Parameters.AddWithValue("@KupacID", id);
+                    cmd.Parameters.AddWithValue("@Vrijeme", DateTime.Now.ToString());
                     cmd.ExecuteNonQuery();
                     con.Close();
                     Skladiste.DisplayData();

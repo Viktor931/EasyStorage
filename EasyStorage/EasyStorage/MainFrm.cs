@@ -129,9 +129,14 @@ namespace EasyStorage
             }
         }
 
-        private void DataGridViewKupci_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewKupci_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            //todo izvjestaj o dugovanju kupca
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+            Form graf = new PrikazDugovanja(Convert.ToInt32(DataGridViewKupci.Rows[e.RowIndex].Cells[0].Value.ToString()), "Graf dugovanja za kupca \"" + DataGridViewKupci.Rows[e.RowIndex].Cells[1].Value.ToString() + "\"");
+            graf.Show();
         }
 
         private void DataGridViewKupci_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
