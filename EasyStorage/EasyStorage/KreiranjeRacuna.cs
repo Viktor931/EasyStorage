@@ -40,18 +40,6 @@ namespace EasyStorage
             set
             {
                 kupacComboBox = value;
-                con.Open();
-                DataTable dt = new DataTable();
-                adapt = new SqlDataAdapter("SELECT ID, Naziv, OIB FROM Kupacs", con);
-                adapt.Fill(dt);
-                foreach (DataRow row in dt.Rows)
-                {
-                    kupacComboBox.Items.Add(new KupacComboBoxItem(row["Naziv"].ToString(), row["OIB"].ToString(), int.Parse(row["ID"].ToString())));
-                }
-                con.Close();
-                kupacComboBox.DropDownStyle = ComboBoxStyle.DropDown;
-                kupacComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-                kupacComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             }
         }
         private static ComboBox artiklComboBox;
@@ -60,18 +48,6 @@ namespace EasyStorage
             set
             {
                 artiklComboBox = value;
-                con.Open();
-                DataTable dt = new DataTable();
-                adapt = new SqlDataAdapter("SELECT Artikli_u_skladistu.Artikl_ID, Artikls.Naziv FROM Artikli_u_skladistu, Artikls WHERE Artikli_u_skladistu.Artikl_ID = Artikls.ID", con);
-                adapt.Fill(dt);
-                foreach (DataRow row in dt.Rows)
-                {
-                    artiklComboBox.Items.Add(new ArtiklComboBoxItem(row["Naziv"].ToString(), int.Parse(row["Artikl_ID"].ToString())));
-                }
-                con.Close();
-                artiklComboBox.DropDownStyle = ComboBoxStyle.DropDown;
-                artiklComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
-                artiklComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             }
         }
         private static TextBox kolicinaTxtbx;
@@ -149,8 +125,35 @@ namespace EasyStorage
         }
         public static void DisplayData()
         {
-            
-            //jos mozda izfillat neku ponudu kupaca
+
+            con.Open();
+            DataTable dt = new DataTable();
+            adapt = new SqlDataAdapter("SELECT Artikli_u_skladistu.Artikl_ID, Artikls.Naziv FROM Artikli_u_skladistu, Artikls WHERE Artikli_u_skladistu.Artikl_ID = Artikls.ID", con);
+            adapt.Fill(dt);
+            artiklComboBox.Items.Clear();
+            foreach (DataRow row in dt.Rows)
+            {
+                artiklComboBox.Items.Add(new ArtiklComboBoxItem(row["Naziv"].ToString(), int.Parse(row["Artikl_ID"].ToString())));
+            }
+            con.Close();
+            artiklComboBox.DropDownStyle = ComboBoxStyle.DropDown;
+            artiklComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            artiklComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+
+            con.Open();
+            dt = new DataTable();
+            adapt = new SqlDataAdapter("SELECT ID, Naziv, OIB FROM Kupacs", con);
+            adapt.Fill(dt);
+            kupacComboBox.Items.Clear();
+            foreach (DataRow row in dt.Rows)
+            {
+                kupacComboBox.Items.Add(new KupacComboBoxItem(row["Naziv"].ToString(), row["OIB"].ToString(), int.Parse(row["ID"].ToString())));
+            }
+            con.Close();
+            kupacComboBox.DropDownStyle = ComboBoxStyle.DropDown;
+            kupacComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            kupacComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+
             if (stavkeRacuna == null) inicijalizirajStavke();
             dataGridViewStavkaRacuna.DataSource = stavkeRacuna;
             dataGridViewStavkaRacuna.Columns[0].Visible = false;
@@ -173,6 +176,12 @@ namespace EasyStorage
             {
                 MessageBox.Show("Neispravan unos cijene!");
                 cijenaTxtbx.Text = "";
+                return;
+            }
+            if(artiklComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Neispravan unos artikla!");
+                artiklComboBox.Text = "";
                 return;
             }
             DataRow[] redoviArtiklID = stavkeRacuna.Select("ArtiklID = '" + ((ArtiklComboBoxItem)artiklComboBox.SelectedItem).ID + "'");

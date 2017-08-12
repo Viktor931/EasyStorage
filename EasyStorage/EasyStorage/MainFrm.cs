@@ -28,23 +28,29 @@ namespace EasyStorage
             KreiranjeRacuna.KupacComboBox = KupacComboBox;
             KreiranjeRacuna.CijenaTxtbx = CijenaTxtbx;
             KreiranjeRacuna.KolicinaTxtbx = KolicinaStavkaTxtbx;
+            NaplataRacuna.DataGridViewNeobradeniRacuni = DataGridViewNeobradeniRacuni;
+            NaplataRacuna.DataGridViewStavkeRacuna = DataGridViewStavkeRacuna;
 
             tabControl1.SelectTab(0);
             Skladiste.DisplayData();
         }
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            if(e.TabPage.Text == "Skladište")
+            if (e.TabPage.Text == "Skladište")
             {
                 Skladiste.DisplayData();
             }
-            else if(e.TabPage.Text == "Kupci")
+            else if (e.TabPage.Text == "Kupci")
             {
                 Kupci.DisplayData();
             }
-            else if(e.TabPage.Text == "Kreiranje Računa")
+            else if (e.TabPage.Text == "Kreiranje Računa")
             {
                 KreiranjeRacuna.DisplayData();
+            }
+            else if (e.TabPage.Text == "Naplata računa")
+            {
+                NaplataRacuna.DisplayData();
             }
         }
         //eventi za tab artikli
@@ -171,6 +177,49 @@ namespace EasyStorage
         private void KreirajRacunBtn_Click(object sender, EventArgs e)
         {
             KreiranjeRacuna.KreirajRacun();
+        }
+
+        private void OsvjeziBtn1_Click(object sender, EventArgs e)
+        {
+            KreiranjeRacuna.DisplayData();
+        }
+
+        //Eventi za naplatu racuna
+        private void RacunPlacenBtn_Click(object sender, EventArgs e)
+        {
+            NaplataRacuna.RacunPlacen();
+        }
+
+        private void PonistiRacunBtn1_Click(object sender, EventArgs e)
+        {
+            NaplataRacuna.PonistiRacun();
+        }
+
+        private void OdgodaPlacanjaBtn_Click(object sender, EventArgs e)
+        {
+            NaplataRacuna.OdgodaPlacanja();
+        }
+
+        private void DataGridViewNeobradeniRacuni_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            DataGridViewNeobradeniRacuni.ClearSelection();
+        }
+
+        private void DataGridViewNeobradeniRacuni_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            NaplataRacuna.SelektiranRacunID = Convert.ToInt32(DataGridViewNeobradeniRacuni.Rows[e.RowIndex].Cells[0].Value.ToString());
+            if (NaplataRacuna.SelektiranRacunID == -1) DataGridViewNeobradeniRacuni.Rows[e.RowIndex].Selected = false;
+        }
+
+        private void DataGridViewStavkeRacuna_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            DataGridViewStavkeRacuna.ClearSelection();
+        }
+
+        private void OsvjeziBtn_Click(object sender, EventArgs e)
+        {
+            NaplataRacuna.DisplayData();
+            NaplataRacuna.SelektiranRacunID = -1;
         }
     }
 }
