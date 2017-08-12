@@ -126,5 +126,10 @@ namespace EasyStorage
         {
             DataGridViewPopisPromjena.ClearSelection();
         }
+
+        private void DataGridViewRacun_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            DataGridViewRacun.ClearSelection();
+        }
     }
 }

@@ -35,16 +35,16 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.graf = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.stavkeRacuna = new System.Windows.Forms.Label();
+            this.DataGridViewRacun = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.DataGridViewPopisPromjena = new System.Windows.Forms.DataGridView();
-            this.DataGridViewRacun = new System.Windows.Forms.DataGridView();
-            this.stavkeRacuna = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.graf)).BeginInit();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewPopisPromjena)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewRacun)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewPopisPromjena)).BeginInit();
             this.SuspendLayout();
             // 
             // naslov
@@ -106,6 +106,36 @@
             this.tabPage2.Text = "Tabela";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // stavkeRacuna
+            // 
+            this.stavkeRacuna.AutoSize = true;
+            this.stavkeRacuna.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.stavkeRacuna.Location = new System.Drawing.Point(785, 110);
+            this.stavkeRacuna.Name = "stavkeRacuna";
+            this.stavkeRacuna.Size = new System.Drawing.Size(102, 18);
+            this.stavkeRacuna.TabIndex = 32;
+            this.stavkeRacuna.Text = "Stavke računa";
+            // 
+            // DataGridViewRacun
+            // 
+            this.DataGridViewRacun.AllowUserToAddRows = false;
+            this.DataGridViewRacun.AllowUserToDeleteRows = false;
+            this.DataGridViewRacun.AllowUserToResizeRows = false;
+            this.DataGridViewRacun.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DataGridViewRacun.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewRacun.Enabled = false;
+            this.DataGridViewRacun.Location = new System.Drawing.Point(785, 129);
+            this.DataGridViewRacun.MinimumSize = new System.Drawing.Size(343, 0);
+            this.DataGridViewRacun.MultiSelect = false;
+            this.DataGridViewRacun.Name = "DataGridViewRacun";
+            this.DataGridViewRacun.ReadOnly = true;
+            this.DataGridViewRacun.RowHeadersVisible = false;
+            this.DataGridViewRacun.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DataGridViewRacun.Size = new System.Drawing.Size(346, 414);
+            this.DataGridViewRacun.TabIndex = 31;
+            this.DataGridViewRacun.TabStop = false;
+            this.DataGridViewRacun.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewRacun_DataBindingComplete);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -136,34 +166,6 @@
             this.DataGridViewPopisPromjena.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewPopisPromjena_CellMouseClick);
             this.DataGridViewPopisPromjena.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewPopisPromjena_DataBindingComplete);
             // 
-            // DataGridViewRacun
-            // 
-            this.DataGridViewRacun.AllowUserToAddRows = false;
-            this.DataGridViewRacun.AllowUserToDeleteRows = false;
-            this.DataGridViewRacun.AllowUserToResizeRows = false;
-            this.DataGridViewRacun.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.DataGridViewRacun.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridViewRacun.Location = new System.Drawing.Point(785, 129);
-            this.DataGridViewRacun.MinimumSize = new System.Drawing.Size(343, 0);
-            this.DataGridViewRacun.MultiSelect = false;
-            this.DataGridViewRacun.Name = "DataGridViewRacun";
-            this.DataGridViewRacun.ReadOnly = true;
-            this.DataGridViewRacun.RowHeadersVisible = false;
-            this.DataGridViewRacun.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewRacun.Size = new System.Drawing.Size(346, 414);
-            this.DataGridViewRacun.TabIndex = 31;
-            this.DataGridViewRacun.TabStop = false;
-            // 
-            // stavkeRacuna
-            // 
-            this.stavkeRacuna.AutoSize = true;
-            this.stavkeRacuna.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.stavkeRacuna.Location = new System.Drawing.Point(785, 110);
-            this.stavkeRacuna.Name = "stavkeRacuna";
-            this.stavkeRacuna.Size = new System.Drawing.Size(102, 18);
-            this.stavkeRacuna.TabIndex = 32;
-            this.stavkeRacuna.Text = "Stavke računa";
-            // 
             // PrikazDugovanja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -178,8 +180,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.graf)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewPopisPromjena)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewRacun)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewPopisPromjena)).EndInit();
             this.ResumeLayout(false);
 
         }
