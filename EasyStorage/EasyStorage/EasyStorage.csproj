@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>EasyStorage.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,6 +55,12 @@
     <Compile Include="ArtiklIzvjestaj.Designer.cs">
       <DependentUpon>ArtiklIzvjestaj.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginFrm.Designer.cs">
+      <DependentUpon>LoginFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrikazDugovanja.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +81,9 @@
     <Compile Include="Skladiste.cs" />
     <EmbeddedResource Include="ArtiklIzvjestaj.resx">
       <DependentUpon>ArtiklIzvjestaj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginFrm.resx">
+      <DependentUpon>LoginFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrikazDugovanja.resx">
       <DependentUpon>PrikazDugovanja.cs</DependentUpon>

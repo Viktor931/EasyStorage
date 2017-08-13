@@ -13,6 +13,7 @@ namespace EasyStorage
 {
     public partial class MainFrm : Form
     {
+        private string status = "direktor  ";
         public MainFrm()
         {
             InitializeComponent();
@@ -33,6 +34,68 @@ namespace EasyStorage
 
             tabControl1.SelectTab(0);
             Skladiste.DisplayData();
+        }
+        public MainFrm(string s)
+        {
+            status = s;
+            InitializeComponent();
+            if(s == "blagajnik ")
+            {
+                NaplataRacuna.DataGridViewNeobradeniRacuni = DataGridViewNeobradeniRacuni;
+                NaplataRacuna.DataGridViewStavkeRacuna = DataGridViewStavkeRacuna;
+
+                tabControl1.TabPages.RemoveByKey("SkladisteTab");
+                tabControl1.TabPages.RemoveByKey("KupciTab");
+                tabControl1.TabPages.RemoveByKey("KreiranjeRacunaTab");
+                tabControl1.TabPages.RemoveByKey("IzvjestajiOArtiklima");
+                tabControl1.SelectTab(0);
+                NaplataRacuna.DisplayData();
+            }
+            else if(s == "skladistar")
+            {
+                Skladiste.DataGridViewArtikli = dataGridViewArtikli;
+                Skladiste.Naziv = NazivArtiklaTxtbx;
+                Skladiste.Kolicina = KolicinaTxtbx;
+                Kupci.DataGridViewKupci = DataGridViewKupci;
+                Kupci.Naziv = NazivKupcaTxtbx;
+                Kupci.Dugovanje = DugovanjeTxtbx;
+                Kupci.OIB = OIBTxtbx;
+                KreiranjeRacuna.DataGridViewStavkaRacuna = DataGridViewStavkaRacuna;
+                KreiranjeRacuna.ArtiklComboBox = ArtiklComboBox;
+                KreiranjeRacuna.KupacComboBox = KupacComboBox;
+                KreiranjeRacuna.CijenaTxtbx = CijenaTxtbx;
+                KreiranjeRacuna.KolicinaTxtbx = KolicinaStavkaTxtbx;
+
+
+                tabControl1.TabPages.RemoveByKey("NaplataRacunaTab");
+                tabControl1.TabPages.RemoveByKey("IzvjestajiOArtiklima");
+                tabControl1.SelectTab(2);
+                KreiranjeRacuna.DisplayData();
+            }
+            else if(s == "direktor  ")
+            {
+                Skladiste.DataGridViewArtikli = dataGridViewArtikli;
+                Skladiste.Naziv = NazivArtiklaTxtbx;
+                Skladiste.Kolicina = KolicinaTxtbx;
+                Kupci.DataGridViewKupci = DataGridViewKupci;
+                Kupci.Naziv = NazivKupcaTxtbx;
+                Kupci.Dugovanje = DugovanjeTxtbx;
+                Kupci.OIB = OIBTxtbx;
+                KreiranjeRacuna.DataGridViewStavkaRacuna = DataGridViewStavkaRacuna;
+                KreiranjeRacuna.ArtiklComboBox = ArtiklComboBox;
+                KreiranjeRacuna.KupacComboBox = KupacComboBox;
+                KreiranjeRacuna.CijenaTxtbx = CijenaTxtbx;
+                KreiranjeRacuna.KolicinaTxtbx = KolicinaStavkaTxtbx;
+                NaplataRacuna.DataGridViewNeobradeniRacuni = DataGridViewNeobradeniRacuni;
+                NaplataRacuna.DataGridViewStavkeRacuna = DataGridViewStavkeRacuna;
+
+                tabControl1.SelectTab(0);
+                Skladiste.DisplayData();
+            }
+            else
+            {
+                MessageBox.Show("Neka mrkva");
+            }
         }
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
@@ -148,8 +211,11 @@ namespace EasyStorage
             {
                 return;
             }
-            Form graf = new PrikazDugovanja(Convert.ToInt32(DataGridViewKupci.Rows[e.RowIndex].Cells[0].Value.ToString()), "Graf dugovanja za kupca \"" + DataGridViewKupci.Rows[e.RowIndex].Cells[1].Value.ToString() + "\"");
-            graf.Show();
+            if (status == "direktor  ")
+            {
+                Form graf = new PrikazDugovanja(Convert.ToInt32(DataGridViewKupci.Rows[e.RowIndex].Cells[0].Value.ToString()), "Graf dugovanja za kupca \"" + DataGridViewKupci.Rows[e.RowIndex].Cells[1].Value.ToString() + "\"");
+                graf.Show();
+            }
         }
 
         private void DataGridViewKupci_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -244,8 +310,11 @@ namespace EasyStorage
         //Eventovi za izvjestaje o artiklima
         private void DataGridViewArtikliIzvjesca_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            ArtiklIzvjestaj a = new ArtiklIzvjestaj(Convert.ToInt32(DataGridViewArtikliIzvjesca.Rows[e.RowIndex].Cells[0].Value.ToString()), "Izvještaj o prodanoj količini (kg) za artikl \"" + DataGridViewArtikliIzvjesca.Rows[e.RowIndex].Cells[1].Value.ToString() + "\"");
-            a.Show();
+            if (status == "direktor  ")
+            {
+                ArtiklIzvjestaj a = new ArtiklIzvjestaj(Convert.ToInt32(DataGridViewArtikliIzvjesca.Rows[e.RowIndex].Cells[0].Value.ToString()), "Izvještaj o prodanoj količini (kg) za artikl \"" + DataGridViewArtikliIzvjesca.Rows[e.RowIndex].Cells[1].Value.ToString() + "\"");
+                a.Show();
+            }
         }
     }
 }

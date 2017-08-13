@@ -46,6 +46,7 @@ namespace EasyStorage
                 graf.Series[0].Points.AddXY(row[0].ToString().Split(' ')[0], row[1].ToString());
                 suma += decimal.Parse(row[1].ToString());
             }
+            if (dt.Rows.Count == 0) return;
             con.Open();
             cmd = new SqlCommand("SELECT Nabavljena_kolicina FROM Artikls WHERE ID = @ArtiklID", con);
             cmd.Parameters.AddWithValue("@ArtiklID", artiklID);
