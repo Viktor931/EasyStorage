@@ -58,10 +58,11 @@ namespace EasyStorage
                 float f;
                 if (float.TryParse(kolicina.Text, out f) && f >= 0)
                 {
-                    cmd = new SqlCommand("INSERT INTO Artikls(Naziv, Datum) OUTPUT INSERTED.ID VALUES(@Naziv, @Datum)", con);
+                    cmd = new SqlCommand("INSERT INTO Artikls(Naziv, Datum, Nabavljena_kolicina) OUTPUT INSERTED.ID VALUES(@Naziv, @Datum, @Kolicina)", con);
                     con.Open();
                     cmd.Parameters.AddWithValue("@Naziv", naziv.Text);
                     cmd.Parameters.AddWithValue("@Datum", DateTime.Now.ToString());
+                    cmd.Parameters.AddWithValue("@Kolicina", kolicina.Text);
                     int id = (int)cmd.ExecuteScalar();
                     cmd = new SqlCommand("INSERT INTO Artikli_u_skladistu(Kolicina, Artikl_ID) VALUES(@Kolicina, @Artikl_ID)", con);
                     cmd.Parameters.AddWithValue("@Kolicina", kolicina.Text);
@@ -103,10 +104,10 @@ namespace EasyStorage
                             cmd.Parameters.AddWithValue("@Naziv", naziv.Text);
                             cmd.Parameters.AddWithValue("@IDArtikl", ArtiklID);
                             cmd.ExecuteNonQuery();
-                            cmd.CommandText = "UPDATE Artikli_u_skladistu SET Kolicina = @Kolicina WHERE Artikl_ID = @Artikl";
+                            /*cmd.CommandText = "UPDATE Artikli_u_skladistu SET Kolicina = @Kolicina WHERE Artikl_ID = @Artikl";
                             cmd.Parameters.AddWithValue("@Kolicina", kolicina.Text);
                             cmd.Parameters.AddWithValue("@Artikl", ArtiklID);
-                            cmd.ExecuteNonQuery();
+                            cmd.ExecuteNonQuery();*///ovo nemere jer je glupo "azurirat kolicinu, ona se automatski auzira kreiranjem racuna"
                             con.Close();
                             DisplayData();
                             ClearFields();

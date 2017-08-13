@@ -52,6 +52,18 @@ namespace EasyStorage
             {
                 NaplataRacuna.DisplayData();
             }
+            else if(e.TabPage.Text == "Izvještaji o artiklima")
+            {
+                SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=EasyStorageDB;Integrated Security=true;");
+                con.Open();
+                DataTable dt = new DataTable();
+                SqlDataAdapter adapt = new SqlDataAdapter("SELECT ID, Naziv, Datum FROM Artikls", con);
+                adapt.Fill(dt);
+                DataGridViewArtikliIzvjesca.DataSource = dt;
+                DataGridViewArtikliIzvjesca.Columns[0].Visible = false;
+                DataGridViewArtikliIzvjesca.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                con.Close();
+            }
         }
         //eventi za tab artikli
         private void DodajBtn_Click(object sender, EventArgs e)
@@ -94,6 +106,7 @@ namespace EasyStorage
         private void dataGridViewArtikli_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dataGridViewArtikli.ClearSelection();
+            Skladiste.ClearFields();
         }
         //eventi za tab kupci
         private void KupciDodajBtn_Click(object sender, EventArgs e)
@@ -142,6 +155,7 @@ namespace EasyStorage
         private void DataGridViewKupci_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             DataGridViewKupci.ClearSelection();
+            Kupci.ClearFields();
         }
 
         //eventi za kreiranje racuna
@@ -225,6 +239,13 @@ namespace EasyStorage
         {
             NaplataRacuna.DisplayData();
             NaplataRacuna.SelektiranRacunID = -1;
+        }
+
+        //Eventovi za izvjestaje o artiklima
+        private void DataGridViewArtikliIzvjesca_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ArtiklIzvjestaj a = new ArtiklIzvjestaj(Convert.ToInt32(DataGridViewArtikliIzvjesca.Rows[e.RowIndex].Cells[0].Value.ToString()), "Izvještaj o prodanoj količini (kg) za artikl \"" + DataGridViewArtikliIzvjesca.Rows[e.RowIndex].Cells[1].Value.ToString() + "\"");
+            a.Show();
         }
     }
 }

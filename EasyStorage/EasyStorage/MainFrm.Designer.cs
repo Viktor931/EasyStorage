@@ -70,6 +70,8 @@
             this.PonistiRacunBtn1 = new System.Windows.Forms.Button();
             this.DataGridViewStavkeRacuna = new System.Windows.Forms.DataGridView();
             this.DataGridViewNeobradeniRacuni = new System.Windows.Forms.DataGridView();
+            this.IzvjestajiOArtiklima = new System.Windows.Forms.TabPage();
+            this.DataGridViewArtikliIzvjesca = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.SkladisteTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewArtikli)).BeginInit();
@@ -80,6 +82,8 @@
             this.NaplataRacunaTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewStavkeRacuna)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewNeobradeniRacuni)).BeginInit();
+            this.IzvjestajiOArtiklima.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewArtikliIzvjesca)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -88,6 +92,7 @@
             this.tabControl1.Controls.Add(this.KupciTab);
             this.tabControl1.Controls.Add(this.KreiranjeRacunaTab);
             this.tabControl1.Controls.Add(this.NaplataRacunaTab);
+            this.tabControl1.Controls.Add(this.IzvjestajiOArtiklima);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -566,6 +571,34 @@
             this.DataGridViewNeobradeniRacuni.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewNeobradeniRacuni_CellClick);
             this.DataGridViewNeobradeniRacuni.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewNeobradeniRacuni_DataBindingComplete);
             // 
+            // IzvjestajiOArtiklima
+            // 
+            this.IzvjestajiOArtiklima.Controls.Add(this.DataGridViewArtikliIzvjesca);
+            this.IzvjestajiOArtiklima.Location = new System.Drawing.Point(4, 22);
+            this.IzvjestajiOArtiklima.Name = "IzvjestajiOArtiklima";
+            this.IzvjestajiOArtiklima.Size = new System.Drawing.Size(545, 367);
+            this.IzvjestajiOArtiklima.TabIndex = 4;
+            this.IzvjestajiOArtiklima.Text = "Izvještaji o artiklima";
+            this.IzvjestajiOArtiklima.UseVisualStyleBackColor = true;
+            // 
+            // DataGridViewArtikliIzvjesca
+            // 
+            this.DataGridViewArtikliIzvjesca.AllowUserToAddRows = false;
+            this.DataGridViewArtikliIzvjesca.AllowUserToDeleteRows = false;
+            this.DataGridViewArtikliIzvjesca.AllowUserToResizeRows = false;
+            this.DataGridViewArtikliIzvjesca.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DataGridViewArtikliIzvjesca.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewArtikliIzvjesca.Location = new System.Drawing.Point(101, 20);
+            this.DataGridViewArtikliIzvjesca.MinimumSize = new System.Drawing.Size(343, 0);
+            this.DataGridViewArtikliIzvjesca.MultiSelect = false;
+            this.DataGridViewArtikliIzvjesca.Name = "DataGridViewArtikliIzvjesca";
+            this.DataGridViewArtikliIzvjesca.ReadOnly = true;
+            this.DataGridViewArtikliIzvjesca.RowHeadersVisible = false;
+            this.DataGridViewArtikliIzvjesca.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DataGridViewArtikliIzvjesca.Size = new System.Drawing.Size(343, 321);
+            this.DataGridViewArtikliIzvjesca.TabIndex = 1;
+            this.DataGridViewArtikliIzvjesca.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewArtikliIzvjesca_CellDoubleClick);
+            // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -587,6 +620,8 @@
             this.NaplataRacunaTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewStavkeRacuna)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewNeobradeniRacuni)).EndInit();
+            this.IzvjestajiOArtiklima.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewArtikliIzvjesca)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -635,6 +670,8 @@
         private System.Windows.Forms.DataGridView DataGridViewNeobradeniRacuni;
         private System.Windows.Forms.Button OsvjeziBtn;
         private System.Windows.Forms.Button OsvjeziBtn1;
+        private System.Windows.Forms.TabPage IzvjestajiOArtiklima;
+        private System.Windows.Forms.DataGridView DataGridViewArtikliIzvjesca;
     }
 }
 

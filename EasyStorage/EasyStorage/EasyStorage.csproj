@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArtiklIzvjestaj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArtiklIzvjestaj.Designer.cs">
+      <DependentUpon>ArtiklIzvjestaj.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrikazDugovanja.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Skladiste.cs" />
+    <EmbeddedResource Include="ArtiklIzvjestaj.resx">
+      <DependentUpon>ArtiklIzvjestaj.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrikazDugovanja.resx">
       <DependentUpon>PrikazDugovanja.cs</DependentUpon>
     </EmbeddedResource>

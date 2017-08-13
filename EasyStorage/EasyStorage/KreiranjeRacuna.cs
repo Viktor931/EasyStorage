@@ -178,6 +178,7 @@ namespace EasyStorage
                 cijenaTxtbx.Text = "";
                 return;
             }
+            artiklComboBox.SelectedIndex = artiklComboBox.FindStringExact(artiklComboBox.Text);
             if(artiklComboBox.SelectedItem == null)
             {
                 MessageBox.Show("Neispravan unos artikla!");
