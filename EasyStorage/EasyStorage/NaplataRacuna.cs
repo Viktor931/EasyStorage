@@ -39,17 +39,18 @@ namespace EasyStorage
                 {
                     selektiranRacunID = value;
                     con.Open();
-                    cmd = new SqlCommand("SELECT Artikls.Naziv, Artikls.Datum, Stavka_racuna.Kolicina, Stavka_racuna.Cijena, Artikls.ID FROM Artikls, Stavka_racuna WHERE Artikls.ID = Stavka_racuna.ArtiklID AND Stavka_racuna.RacunID = @RacunID", con);
+                    cmd = new SqlCommand("SELECT Artikls.Naziv, Artikls.Datum, Stavka_racuna.Kolicina AS 'Količina (kg)', Stavka_racuna.Cijena AS 'Cijena (kn/kg)', Artikls.ID FROM Artikls, Stavka_racuna WHERE Artikls.ID = Stavka_racuna.ArtiklID AND Stavka_racuna.RacunID = @RacunID", con);
                     cmd.Parameters.AddWithValue("@RacunID", selektiranRacunID);
                     adapt = new SqlDataAdapter(cmd); 
                     DataTable dt = new DataTable();
                     adapt.Fill(dt);
                     dataGridViewStavkeRacuna.DataSource = null;
                     dataGridViewStavkeRacuna.DataSource = dt;
-                    dataGridViewStavkeRacuna.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     dataGridViewStavkeRacuna.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     dataGridViewStavkeRacuna.Columns[2].DefaultCellStyle.Format = "0.00##";
                     dataGridViewStavkeRacuna.Columns[3].DefaultCellStyle.Format = "0.00##";
+                    dataGridViewStavkeRacuna.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dataGridViewStavkeRacuna.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     dataGridViewStavkeRacuna.Columns[4].Visible = false;
                     dataGridViewStavkeRacuna.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                     con.Close();

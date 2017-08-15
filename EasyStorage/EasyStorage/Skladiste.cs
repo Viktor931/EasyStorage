@@ -49,6 +49,9 @@ namespace EasyStorage
             dataGridViewArtikli.DataSource = dt;
             dataGridViewArtikli.Columns[0].Visible = false;
             dataGridViewArtikli.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewArtikli.Columns[3].DefaultCellStyle.Format = "0.00##";
+            dataGridViewArtikli.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewArtikli.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             con.Close();
         }
         public static void Dodaj()

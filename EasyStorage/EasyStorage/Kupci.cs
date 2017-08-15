@@ -55,18 +55,21 @@ namespace EasyStorage
             dataGridViewKupci.DataSource = dt;
             dataGridViewKupci.Columns[0].Visible = false;
             dataGridViewKupci.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewKupci.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewKupci.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewKupci.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            con.Close();
             dataGridViewKupci.Columns[3].DefaultCellStyle.Format = "0.00##";
+            dataGridViewKupci.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            con.Close();
         }
         public static void Dodaj()
         {
-            if (naziv.Text != "" || dugovanje.Text != "")
+            if (naziv.Text != "" || oib.Text != "")
             {
-                float f = 0;
-                if (dugovanje.Text == "" || (float.TryParse(dugovanje.Text, out f) && f >= 0))
+                long o;
+                if (long.TryParse(oib.Text, out o) && oib.Text.Length == 11)
                 {
+                    float f = 0;
+                    float.TryParse(dugovanje.Text, out f);
                     if(f > 0)
                     {
                         MessageBox.Show("Novokreirani kupac uvijek ima početno dugovanje 0, koristite opciju ažuriraj kako biste promjenili dugovanje!");
@@ -81,13 +84,12 @@ namespace EasyStorage
                     cmd.Parameters.AddWithValue("@Vrijeme", DateTime.Now.ToString());
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    Skladiste.DisplayData();
                     ClearFields();
+                    DisplayData();
                 }
                 else
                 {
-                    MessageBox.Show("Dugovanje mora biti broj veći ili jednak 0");
-                    dugovanje.Text = "";
+                    MessageBox.Show("Neispravno unesen OIB!");
                 }
             }
             else

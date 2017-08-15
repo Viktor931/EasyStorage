@@ -120,11 +120,13 @@ namespace EasyStorage
                 SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=EasyStorageDB;Integrated Security=true;");
                 con.Open();
                 DataTable dt = new DataTable();
-                SqlDataAdapter adapt = new SqlDataAdapter("SELECT ID, Naziv, Datum FROM Artikls", con);
+                SqlDataAdapter adapt = new SqlDataAdapter("SELECT ID, Naziv, Datum FROM Artikls ORDER BY Datum DESC", con);
                 adapt.Fill(dt);
                 DataGridViewArtikliIzvjesca.DataSource = dt;
                 DataGridViewArtikliIzvjesca.Columns[0].Visible = false;
+                DataGridViewArtikliIzvjesca.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 DataGridViewArtikliIzvjesca.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                DataGridViewArtikliIzvjesca.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 con.Close();
             }
         }
@@ -201,7 +203,7 @@ namespace EasyStorage
                 Kupci.KupacID = id;
                 NazivKupcaTxtbx.Text = DataGridViewKupci.Rows[e.RowIndex].Cells[1].Value.ToString();
                 OIBTxtbx.Text = DataGridViewKupci.Rows[e.RowIndex].Cells[2].Value.ToString();
-                DugovanjeTxtbx.Text = DataGridViewKupci.Rows[e.RowIndex].Cells[3].Value.ToString();
+                DugovanjeTxtbx.Text = DataGridViewKupci.Rows[e.RowIndex].Cells[3].Value.ToString().Substring(0, DataGridViewKupci.Rows[e.RowIndex].Cells[3].Value.ToString().Length - 2);
             }
         }
 
@@ -315,6 +317,11 @@ namespace EasyStorage
                 ArtiklIzvjestaj a = new ArtiklIzvjestaj(Convert.ToInt32(DataGridViewArtikliIzvjesca.Rows[e.RowIndex].Cells[0].Value.ToString()), "Izvještaj o prodanoj količini (kg) za artikl \"" + DataGridViewArtikliIzvjesca.Rows[e.RowIndex].Cells[1].Value.ToString() + "\"");
                 a.Show();
             }
+        }
+
+        private void tabControl1_HelpRequested(object sender, HelpEventArgs hlpevent)
+        {
+            Help.ShowHelp(this, Application.StartupPath + @"\" + "help.chm");
         }
     }
 }

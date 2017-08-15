@@ -72,6 +72,7 @@
             this.DataGridViewNeobradeniRacuni = new System.Windows.Forms.DataGridView();
             this.IzvjestajiOArtiklima = new System.Windows.Forms.TabPage();
             this.DataGridViewArtikliIzvjesca = new System.Windows.Forms.DataGridView();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.tabControl1.SuspendLayout();
             this.SkladisteTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewArtikli)).BeginInit();
@@ -97,9 +98,11 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(553, 393);
+            this.tabControl1.Size = new System.Drawing.Size(553, 540);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.TabStop = false;
             this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
+            this.tabControl1.HelpRequested += new System.Windows.Forms.HelpEventHandler(this.tabControl1_HelpRequested);
             // 
             // SkladisteTab
             // 
@@ -114,7 +117,7 @@
             this.SkladisteTab.Location = new System.Drawing.Point(4, 22);
             this.SkladisteTab.Name = "SkladisteTab";
             this.SkladisteTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SkladisteTab.Size = new System.Drawing.Size(545, 367);
+            this.SkladisteTab.Size = new System.Drawing.Size(545, 514);
             this.SkladisteTab.TabIndex = 0;
             this.SkladisteTab.Text = "Skladište";
             this.SkladisteTab.UseVisualStyleBackColor = true;
@@ -142,21 +145,21 @@
             this.KolicinaTxtbx.Location = new System.Drawing.Point(323, 51);
             this.KolicinaTxtbx.Name = "KolicinaTxtbx";
             this.KolicinaTxtbx.Size = new System.Drawing.Size(100, 20);
-            this.KolicinaTxtbx.TabIndex = 5;
+            this.KolicinaTxtbx.TabIndex = 2;
             // 
             // NazivArtiklaTxtbx
             // 
             this.NazivArtiklaTxtbx.Location = new System.Drawing.Point(80, 51);
             this.NazivArtiklaTxtbx.Name = "NazivArtiklaTxtbx";
             this.NazivArtiklaTxtbx.Size = new System.Drawing.Size(200, 20);
-            this.NazivArtiklaTxtbx.TabIndex = 4;
+            this.NazivArtiklaTxtbx.TabIndex = 1;
             // 
             // ObrisiBtn
             // 
             this.ObrisiBtn.Location = new System.Drawing.Point(323, 92);
             this.ObrisiBtn.Name = "ObrisiBtn";
-            this.ObrisiBtn.Size = new System.Drawing.Size(100, 25);
-            this.ObrisiBtn.TabIndex = 3;
+            this.ObrisiBtn.Size = new System.Drawing.Size(100, 28);
+            this.ObrisiBtn.TabIndex = 5;
             this.ObrisiBtn.Text = "Obriši";
             this.ObrisiBtn.UseVisualStyleBackColor = true;
             this.ObrisiBtn.Click += new System.EventHandler(this.ObrisiBtn_Click);
@@ -165,8 +168,8 @@
             // 
             this.AzurirajBtn.Location = new System.Drawing.Point(203, 92);
             this.AzurirajBtn.Name = "AzurirajBtn";
-            this.AzurirajBtn.Size = new System.Drawing.Size(100, 25);
-            this.AzurirajBtn.TabIndex = 2;
+            this.AzurirajBtn.Size = new System.Drawing.Size(100, 28);
+            this.AzurirajBtn.TabIndex = 4;
             this.AzurirajBtn.Text = "Ažuriraj";
             this.AzurirajBtn.UseVisualStyleBackColor = true;
             this.AzurirajBtn.Click += new System.EventHandler(this.AzurirajBtn_Click);
@@ -175,8 +178,8 @@
             // 
             this.DodajBtn.Location = new System.Drawing.Point(80, 92);
             this.DodajBtn.Name = "DodajBtn";
-            this.DodajBtn.Size = new System.Drawing.Size(100, 25);
-            this.DodajBtn.TabIndex = 1;
+            this.DodajBtn.Size = new System.Drawing.Size(100, 28);
+            this.DodajBtn.TabIndex = 3;
             this.DodajBtn.Text = "Dodaj";
             this.DodajBtn.UseVisualStyleBackColor = true;
             this.DodajBtn.Click += new System.EventHandler(this.DodajBtn_Click);
@@ -195,8 +198,9 @@
             this.dataGridViewArtikli.ReadOnly = true;
             this.dataGridViewArtikli.RowHeadersVisible = false;
             this.dataGridViewArtikli.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewArtikli.Size = new System.Drawing.Size(343, 207);
+            this.dataGridViewArtikli.Size = new System.Drawing.Size(343, 368);
             this.dataGridViewArtikli.TabIndex = 0;
+            this.dataGridViewArtikli.TabStop = false;
             this.dataGridViewArtikli.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewArtikli_CellMouseClick);
             this.dataGridViewArtikli.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewArtikli_DataBindingComplete);
             // 
@@ -214,7 +218,7 @@
             this.KupciTab.Location = new System.Drawing.Point(4, 22);
             this.KupciTab.Name = "KupciTab";
             this.KupciTab.Padding = new System.Windows.Forms.Padding(3);
-            this.KupciTab.Size = new System.Drawing.Size(545, 367);
+            this.KupciTab.Size = new System.Drawing.Size(545, 514);
             this.KupciTab.TabIndex = 1;
             this.KupciTab.Text = "Kupci";
             this.KupciTab.UseVisualStyleBackColor = true;
@@ -233,7 +237,7 @@
             this.OIBTxtbx.Location = new System.Drawing.Point(221, 53);
             this.OIBTxtbx.Name = "OIBTxtbx";
             this.OIBTxtbx.Size = new System.Drawing.Size(100, 20);
-            this.OIBTxtbx.TabIndex = 13;
+            this.OIBTxtbx.TabIndex = 2;
             // 
             // label3
             // 
@@ -258,21 +262,21 @@
             this.DugovanjeTxtbx.Location = new System.Drawing.Point(344, 53);
             this.DugovanjeTxtbx.Name = "DugovanjeTxtbx";
             this.DugovanjeTxtbx.Size = new System.Drawing.Size(100, 20);
-            this.DugovanjeTxtbx.TabIndex = 14;
+            this.DugovanjeTxtbx.TabIndex = 3;
             // 
             // NazivKupcaTxtbx
             // 
             this.NazivKupcaTxtbx.Location = new System.Drawing.Point(101, 53);
             this.NazivKupcaTxtbx.Name = "NazivKupcaTxtbx";
             this.NazivKupcaTxtbx.Size = new System.Drawing.Size(100, 20);
-            this.NazivKupcaTxtbx.TabIndex = 12;
+            this.NazivKupcaTxtbx.TabIndex = 1;
             // 
             // KupciAzurirajBtn
             // 
             this.KupciAzurirajBtn.Location = new System.Drawing.Point(284, 94);
             this.KupciAzurirajBtn.Name = "KupciAzurirajBtn";
             this.KupciAzurirajBtn.Size = new System.Drawing.Size(160, 25);
-            this.KupciAzurirajBtn.TabIndex = 16;
+            this.KupciAzurirajBtn.TabIndex = 5;
             this.KupciAzurirajBtn.Text = "Ažuriraj";
             this.KupciAzurirajBtn.UseVisualStyleBackColor = true;
             this.KupciAzurirajBtn.Click += new System.EventHandler(this.KupciAzurirajBtn_Click);
@@ -282,7 +286,7 @@
             this.KupciDodajBtn.Location = new System.Drawing.Point(101, 94);
             this.KupciDodajBtn.Name = "KupciDodajBtn";
             this.KupciDodajBtn.Size = new System.Drawing.Size(160, 25);
-            this.KupciDodajBtn.TabIndex = 15;
+            this.KupciDodajBtn.TabIndex = 4;
             this.KupciDodajBtn.Text = "Dodaj";
             this.KupciDodajBtn.UseVisualStyleBackColor = true;
             this.KupciDodajBtn.Click += new System.EventHandler(this.KupciDodajBtn_Click);
@@ -301,7 +305,7 @@
             this.DataGridViewKupci.ReadOnly = true;
             this.DataGridViewKupci.RowHeadersVisible = false;
             this.DataGridViewKupci.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewKupci.Size = new System.Drawing.Size(343, 207);
+            this.DataGridViewKupci.Size = new System.Drawing.Size(343, 366);
             this.DataGridViewKupci.TabIndex = 28;
             this.DataGridViewKupci.TabStop = false;
             this.DataGridViewKupci.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewKupci_CellMouseClick);
@@ -326,7 +330,7 @@
             this.KreiranjeRacunaTab.Controls.Add(this.DataGridViewStavkaRacuna);
             this.KreiranjeRacunaTab.Location = new System.Drawing.Point(4, 22);
             this.KreiranjeRacunaTab.Name = "KreiranjeRacunaTab";
-            this.KreiranjeRacunaTab.Size = new System.Drawing.Size(545, 367);
+            this.KreiranjeRacunaTab.Size = new System.Drawing.Size(545, 514);
             this.KreiranjeRacunaTab.TabIndex = 2;
             this.KreiranjeRacunaTab.Text = "Kreiranje Računa";
             this.KreiranjeRacunaTab.UseVisualStyleBackColor = true;
@@ -337,7 +341,7 @@
             this.OsvjeziBtn1.Location = new System.Drawing.Point(382, 310);
             this.OsvjeziBtn1.Name = "OsvjeziBtn1";
             this.OsvjeziBtn1.Size = new System.Drawing.Size(135, 40);
-            this.OsvjeziBtn1.TabIndex = 44;
+            this.OsvjeziBtn1.TabIndex = 9;
             this.OsvjeziBtn1.Text = "Osvježi";
             this.OsvjeziBtn1.UseVisualStyleBackColor = true;
             this.OsvjeziBtn1.Click += new System.EventHandler(this.OsvjeziBtn1_Click);
@@ -348,7 +352,7 @@
             this.KreirajRacunBtn.Location = new System.Drawing.Point(382, 220);
             this.KreirajRacunBtn.Name = "KreirajRacunBtn";
             this.KreirajRacunBtn.Size = new System.Drawing.Size(136, 59);
-            this.KreirajRacunBtn.TabIndex = 42;
+            this.KreirajRacunBtn.TabIndex = 8;
             this.KreirajRacunBtn.Text = "Kreiraj račun";
             this.KreirajRacunBtn.UseVisualStyleBackColor = true;
             this.KreirajRacunBtn.Click += new System.EventHandler(this.KreirajRacunBtn_Click);
@@ -359,7 +363,7 @@
             this.PonistiRacunBtn.Location = new System.Drawing.Point(382, 143);
             this.PonistiRacunBtn.Name = "PonistiRacunBtn";
             this.PonistiRacunBtn.Size = new System.Drawing.Size(136, 43);
-            this.PonistiRacunBtn.TabIndex = 41;
+            this.PonistiRacunBtn.TabIndex = 7;
             this.PonistiRacunBtn.Text = "Poništi Račun";
             this.PonistiRacunBtn.UseVisualStyleBackColor = true;
             this.PonistiRacunBtn.Click += new System.EventHandler(this.PonistiRacunBtn_Click);
@@ -370,7 +374,7 @@
             this.KupacComboBox.Location = new System.Drawing.Point(382, 55);
             this.KupacComboBox.Name = "KupacComboBox";
             this.KupacComboBox.Size = new System.Drawing.Size(136, 21);
-            this.KupacComboBox.TabIndex = 40;
+            this.KupacComboBox.TabIndex = 6;
             this.KupacComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KupacComboBox_KeyDown);
             // 
             // label9
@@ -388,7 +392,7 @@
             this.ArtiklComboBox.Location = new System.Drawing.Point(17, 55);
             this.ArtiklComboBox.Name = "ArtiklComboBox";
             this.ArtiklComboBox.Size = new System.Drawing.Size(100, 21);
-            this.ArtiklComboBox.TabIndex = 38;
+            this.ArtiklComboBox.TabIndex = 1;
             this.ArtiklComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ArtiklComboBox_KeyDown);
             // 
             // label6
@@ -405,7 +409,7 @@
             this.KolicinaStavkaTxtbx.Location = new System.Drawing.Point(137, 56);
             this.KolicinaStavkaTxtbx.Name = "KolicinaStavkaTxtbx";
             this.KolicinaStavkaTxtbx.Size = new System.Drawing.Size(100, 20);
-            this.KolicinaStavkaTxtbx.TabIndex = 30;
+            this.KolicinaStavkaTxtbx.TabIndex = 2;
             // 
             // label7
             // 
@@ -430,14 +434,14 @@
             this.CijenaTxtbx.Location = new System.Drawing.Point(260, 56);
             this.CijenaTxtbx.Name = "CijenaTxtbx";
             this.CijenaTxtbx.Size = new System.Drawing.Size(100, 20);
-            this.CijenaTxtbx.TabIndex = 32;
+            this.CijenaTxtbx.TabIndex = 3;
             // 
             // PonistiStavkuRacunaBtn
             // 
             this.PonistiStavkuRacunaBtn.Location = new System.Drawing.Point(200, 97);
             this.PonistiStavkuRacunaBtn.Name = "PonistiStavkuRacunaBtn";
             this.PonistiStavkuRacunaBtn.Size = new System.Drawing.Size(160, 25);
-            this.PonistiStavkuRacunaBtn.TabIndex = 35;
+            this.PonistiStavkuRacunaBtn.TabIndex = 5;
             this.PonistiStavkuRacunaBtn.Text = "Poništi stavku";
             this.PonistiStavkuRacunaBtn.UseVisualStyleBackColor = true;
             this.PonistiStavkuRacunaBtn.Click += new System.EventHandler(this.PonistiStavkuRacunaBtn_Click);
@@ -447,7 +451,7 @@
             this.DodajStavkuRacunaBtn.Location = new System.Drawing.Point(17, 97);
             this.DodajStavkuRacunaBtn.Name = "DodajStavkuRacunaBtn";
             this.DodajStavkuRacunaBtn.Size = new System.Drawing.Size(160, 25);
-            this.DodajStavkuRacunaBtn.TabIndex = 34;
+            this.DodajStavkuRacunaBtn.TabIndex = 4;
             this.DodajStavkuRacunaBtn.Text = "Dodaj stavku";
             this.DodajStavkuRacunaBtn.UseVisualStyleBackColor = true;
             this.DodajStavkuRacunaBtn.Click += new System.EventHandler(this.DodajStavkuRacunaBtn_Click);
@@ -466,7 +470,7 @@
             this.DataGridViewStavkaRacuna.ReadOnly = true;
             this.DataGridViewStavkaRacuna.RowHeadersVisible = false;
             this.DataGridViewStavkaRacuna.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewStavkaRacuna.Size = new System.Drawing.Size(343, 207);
+            this.DataGridViewStavkaRacuna.Size = new System.Drawing.Size(343, 363);
             this.DataGridViewStavkaRacuna.TabIndex = 37;
             this.DataGridViewStavkaRacuna.TabStop = false;
             this.DataGridViewStavkaRacuna.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewStavkaRacuna_CellMouseClick);
@@ -482,7 +486,7 @@
             this.NaplataRacunaTab.Controls.Add(this.DataGridViewNeobradeniRacuni);
             this.NaplataRacunaTab.Location = new System.Drawing.Point(4, 22);
             this.NaplataRacunaTab.Name = "NaplataRacunaTab";
-            this.NaplataRacunaTab.Size = new System.Drawing.Size(545, 367);
+            this.NaplataRacunaTab.Size = new System.Drawing.Size(545, 514);
             this.NaplataRacunaTab.TabIndex = 3;
             this.NaplataRacunaTab.Text = "Naplata računa";
             this.NaplataRacunaTab.UseVisualStyleBackColor = true;
@@ -490,10 +494,10 @@
             // OsvjeziBtn
             // 
             this.OsvjeziBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.OsvjeziBtn.Location = new System.Drawing.Point(382, 229);
+            this.OsvjeziBtn.Location = new System.Drawing.Point(402, 229);
             this.OsvjeziBtn.Name = "OsvjeziBtn";
             this.OsvjeziBtn.Size = new System.Drawing.Size(135, 40);
-            this.OsvjeziBtn.TabIndex = 43;
+            this.OsvjeziBtn.TabIndex = 4;
             this.OsvjeziBtn.Text = "Osvježi";
             this.OsvjeziBtn.UseVisualStyleBackColor = true;
             this.OsvjeziBtn.Click += new System.EventHandler(this.OsvjeziBtn_Click);
@@ -501,10 +505,10 @@
             // OdgodaPlacanjaBtn
             // 
             this.OdgodaPlacanjaBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.OdgodaPlacanjaBtn.Location = new System.Drawing.Point(382, 160);
+            this.OdgodaPlacanjaBtn.Location = new System.Drawing.Point(402, 160);
             this.OdgodaPlacanjaBtn.Name = "OdgodaPlacanjaBtn";
             this.OdgodaPlacanjaBtn.Size = new System.Drawing.Size(135, 40);
-            this.OdgodaPlacanjaBtn.TabIndex = 42;
+            this.OdgodaPlacanjaBtn.TabIndex = 3;
             this.OdgodaPlacanjaBtn.Text = "Odgoda plaćanja";
             this.OdgodaPlacanjaBtn.UseVisualStyleBackColor = true;
             this.OdgodaPlacanjaBtn.Click += new System.EventHandler(this.OdgodaPlacanjaBtn_Click);
@@ -512,10 +516,10 @@
             // RacunPlacenBtn
             // 
             this.RacunPlacenBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.RacunPlacenBtn.Location = new System.Drawing.Point(382, 87);
+            this.RacunPlacenBtn.Location = new System.Drawing.Point(402, 87);
             this.RacunPlacenBtn.Name = "RacunPlacenBtn";
             this.RacunPlacenBtn.Size = new System.Drawing.Size(135, 40);
-            this.RacunPlacenBtn.TabIndex = 41;
+            this.RacunPlacenBtn.TabIndex = 2;
             this.RacunPlacenBtn.Text = "Račun plaćen";
             this.RacunPlacenBtn.UseVisualStyleBackColor = true;
             this.RacunPlacenBtn.Click += new System.EventHandler(this.RacunPlacenBtn_Click);
@@ -523,10 +527,10 @@
             // PonistiRacunBtn1
             // 
             this.PonistiRacunBtn1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.PonistiRacunBtn1.Location = new System.Drawing.Point(382, 14);
+            this.PonistiRacunBtn1.Location = new System.Drawing.Point(402, 14);
             this.PonistiRacunBtn1.Name = "PonistiRacunBtn1";
             this.PonistiRacunBtn1.Size = new System.Drawing.Size(135, 40);
-            this.PonistiRacunBtn1.TabIndex = 40;
+            this.PonistiRacunBtn1.TabIndex = 1;
             this.PonistiRacunBtn1.Text = "Poništi račun";
             this.PonistiRacunBtn1.UseVisualStyleBackColor = true;
             this.PonistiRacunBtn1.Click += new System.EventHandler(this.PonistiRacunBtn1_Click);
@@ -539,14 +543,14 @@
             this.DataGridViewStavkeRacuna.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DataGridViewStavkeRacuna.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewStavkeRacuna.Enabled = false;
-            this.DataGridViewStavkeRacuna.Location = new System.Drawing.Point(8, 137);
+            this.DataGridViewStavkeRacuna.Location = new System.Drawing.Point(8, 173);
             this.DataGridViewStavkeRacuna.MinimumSize = new System.Drawing.Size(343, 0);
             this.DataGridViewStavkeRacuna.MultiSelect = false;
             this.DataGridViewStavkeRacuna.Name = "DataGridViewStavkeRacuna";
             this.DataGridViewStavkeRacuna.ReadOnly = true;
             this.DataGridViewStavkeRacuna.RowHeadersVisible = false;
             this.DataGridViewStavkeRacuna.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewStavkeRacuna.Size = new System.Drawing.Size(343, 207);
+            this.DataGridViewStavkeRacuna.Size = new System.Drawing.Size(388, 333);
             this.DataGridViewStavkeRacuna.TabIndex = 39;
             this.DataGridViewStavkeRacuna.TabStop = false;
             this.DataGridViewStavkeRacuna.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewStavkeRacuna_DataBindingComplete);
@@ -565,7 +569,7 @@
             this.DataGridViewNeobradeniRacuni.ReadOnly = true;
             this.DataGridViewNeobradeniRacuni.RowHeadersVisible = false;
             this.DataGridViewNeobradeniRacuni.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewNeobradeniRacuni.Size = new System.Drawing.Size(343, 90);
+            this.DataGridViewNeobradeniRacuni.Size = new System.Drawing.Size(388, 135);
             this.DataGridViewNeobradeniRacuni.TabIndex = 38;
             this.DataGridViewNeobradeniRacuni.TabStop = false;
             this.DataGridViewNeobradeniRacuni.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewNeobradeniRacuni_CellClick);
@@ -576,7 +580,7 @@
             this.IzvjestajiOArtiklima.Controls.Add(this.DataGridViewArtikliIzvjesca);
             this.IzvjestajiOArtiklima.Location = new System.Drawing.Point(4, 22);
             this.IzvjestajiOArtiklima.Name = "IzvjestajiOArtiklima";
-            this.IzvjestajiOArtiklima.Size = new System.Drawing.Size(545, 367);
+            this.IzvjestajiOArtiklima.Size = new System.Drawing.Size(545, 514);
             this.IzvjestajiOArtiklima.TabIndex = 4;
             this.IzvjestajiOArtiklima.Text = "Izvještaji o artiklima";
             this.IzvjestajiOArtiklima.UseVisualStyleBackColor = true;
@@ -595,15 +599,21 @@
             this.DataGridViewArtikliIzvjesca.ReadOnly = true;
             this.DataGridViewArtikliIzvjesca.RowHeadersVisible = false;
             this.DataGridViewArtikliIzvjesca.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewArtikliIzvjesca.Size = new System.Drawing.Size(343, 321);
+            this.DataGridViewArtikliIzvjesca.Size = new System.Drawing.Size(343, 486);
             this.DataGridViewArtikliIzvjesca.TabIndex = 1;
+            this.DataGridViewArtikliIzvjesca.TabStop = false;
             this.DataGridViewArtikliIzvjesca.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewArtikliIzvjesca_CellDoubleClick);
+            // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "C:\\Users\\Viktor\\Documents\\Visual Studio 2017\\Projects\\WindowsFormsApp1\\EasyStorag" +
+    "e\\EasyStorage\\help.chm";
             // 
             // MainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(553, 393);
+            this.ClientSize = new System.Drawing.Size(553, 540);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainFrm";
             this.Text = "EasyStorage";
@@ -672,6 +682,7 @@
         private System.Windows.Forms.Button OsvjeziBtn1;
         private System.Windows.Forms.TabPage IzvjestajiOArtiklima;
         private System.Windows.Forms.DataGridView DataGridViewArtikliIzvjesca;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }
 

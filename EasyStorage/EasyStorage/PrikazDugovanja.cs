@@ -37,7 +37,7 @@ namespace EasyStorage
             InitializeComponent();
             naslov.Text = s;
             con.Open();
-            cmd = new SqlCommand("SELECT Iznos AS 'Iznos promjene', Ukupno_dugovanje, Vrijeme, RacunID FROM Promjena_dugovanja WHERE KupacID = @KupacID", con);
+            cmd = new SqlCommand("SELECT Iznos AS 'Iznos promjene', Ukupno_dugovanje, Vrijeme, RacunID FROM Promjena_dugovanja WHERE KupacID = @KupacID ORDER BY Vrijeme DESC", con);
             cmd.Parameters.AddWithValue("@KupacID", kupacID);
             adapt = new SqlDataAdapter(cmd);
             popisPromjena = new DataTable();
@@ -65,6 +65,14 @@ namespace EasyStorage
             DataGridViewPopisPromjena.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DataGridViewPopisPromjena.Columns[3].Visible = false;
             sakrijRacun();
+            //graf
+            con.Open();
+            cmd = new SqlCommand("SELECT Iznos AS 'Iznos promjene', Ukupno_dugovanje, Vrijeme, RacunID FROM Promjena_dugovanja WHERE KupacID = @KupacID", con);
+            cmd.Parameters.AddWithValue("@KupacID", kupacID);
+            adapt = new SqlDataAdapter(cmd);
+            popisPromjena = new DataTable();
+            adapt.Fill(popisPromjena);
+            con.Close();
             graf.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
             graf.ChartAreas[0].AxisY.MajorGrid.LineWidth = 1;
             graf.ChartAreas[0].AxisX.IsMarginVisible = false;

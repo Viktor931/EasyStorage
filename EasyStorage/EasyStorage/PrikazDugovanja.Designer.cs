@@ -110,7 +110,7 @@
             // 
             this.stavkeRacuna.AutoSize = true;
             this.stavkeRacuna.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.stavkeRacuna.Location = new System.Drawing.Point(785, 110);
+            this.stavkeRacuna.Location = new System.Drawing.Point(734, 28);
             this.stavkeRacuna.Name = "stavkeRacuna";
             this.stavkeRacuna.Size = new System.Drawing.Size(102, 18);
             this.stavkeRacuna.TabIndex = 32;
@@ -124,14 +124,14 @@
             this.DataGridViewRacun.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.DataGridViewRacun.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewRacun.Enabled = false;
-            this.DataGridViewRacun.Location = new System.Drawing.Point(785, 129);
+            this.DataGridViewRacun.Location = new System.Drawing.Point(737, 49);
             this.DataGridViewRacun.MinimumSize = new System.Drawing.Size(343, 0);
             this.DataGridViewRacun.MultiSelect = false;
             this.DataGridViewRacun.Name = "DataGridViewRacun";
             this.DataGridViewRacun.ReadOnly = true;
             this.DataGridViewRacun.RowHeadersVisible = false;
             this.DataGridViewRacun.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewRacun.Size = new System.Drawing.Size(346, 414);
+            this.DataGridViewRacun.Size = new System.Drawing.Size(394, 494);
             this.DataGridViewRacun.TabIndex = 31;
             this.DataGridViewRacun.TabStop = false;
             this.DataGridViewRacun.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridViewRacun_DataBindingComplete);

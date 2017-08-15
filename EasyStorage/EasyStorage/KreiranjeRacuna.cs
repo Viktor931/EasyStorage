@@ -162,6 +162,8 @@ namespace EasyStorage
             dataGridViewStavkaRacuna.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewStavkaRacuna.Columns[2].DefaultCellStyle.Format = "0.00##";
             dataGridViewStavkaRacuna.Columns[3].DefaultCellStyle.Format = "0.00##";
+            dataGridViewStavkaRacuna.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridViewStavkaRacuna.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
         public static void DodajStavku()
         {
