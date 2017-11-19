@@ -180,6 +180,24 @@ namespace EasyStorage
                 cijenaTxtbx.Text = "";
                 return;
             }
+            if (float.TryParse(kolicinaTxtbx.Text, out f))
+            {
+                if(f < 0)
+                {
+                    MessageBox.Show("Količina ne smije biti negativan broj!");
+                    kolicinaTxtbx.Text = "";
+                    return;
+                }
+            }
+            if (float.TryParse(cijenaTxtbx.Text, out f))
+            {
+                if(f < 0)
+                {
+                    MessageBox.Show("Cijena ne smije biti negativan broj!");
+                    cijenaTxtbx.Text = "";
+                    return;
+                }
+            }
             artiklComboBox.SelectedIndex = artiklComboBox.FindStringExact(artiklComboBox.Text);
             if(artiklComboBox.SelectedItem == null)
             {

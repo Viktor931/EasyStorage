@@ -107,7 +107,7 @@ namespace EasyStorage
             {
                 Kupci.DisplayData();
             }
-            else if (e.TabPage.Text == "Kreiranje Računa")
+            else if (e.TabPage.Text == "Kreiranje računa")
             {
                 KreiranjeRacuna.DisplayData();
             }

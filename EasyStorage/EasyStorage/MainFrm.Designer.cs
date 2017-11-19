@@ -332,7 +332,7 @@
             this.KreiranjeRacunaTab.Name = "KreiranjeRacunaTab";
             this.KreiranjeRacunaTab.Size = new System.Drawing.Size(545, 514);
             this.KreiranjeRacunaTab.TabIndex = 2;
-            this.KreiranjeRacunaTab.Text = "Kreiranje Računa";
+            this.KreiranjeRacunaTab.Text = "Kreiranje računa";
             this.KreiranjeRacunaTab.UseVisualStyleBackColor = true;
             // 
             // OsvjeziBtn1
@@ -400,9 +400,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(137, 23);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 13);
+            this.label6.Size = new System.Drawing.Size(65, 13);
             this.label6.TabIndex = 36;
-            this.label6.Text = "Količina";
+            this.label6.Text = "Količina (kg)";
             // 
             // KolicinaStavkaTxtbx
             // 
@@ -416,9 +416,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(260, 23);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 13);
+            this.label7.Size = new System.Drawing.Size(74, 13);
             this.label7.TabIndex = 33;
-            this.label7.Text = "Cijena";
+            this.label7.Text = "Cijena (kn/kg)";
             // 
             // label8
             // 

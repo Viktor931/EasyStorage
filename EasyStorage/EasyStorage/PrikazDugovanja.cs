@@ -37,7 +37,7 @@ namespace EasyStorage
             InitializeComponent();
             naslov.Text = s;
             con.Open();
-            cmd = new SqlCommand("SELECT Iznos AS 'Iznos promjene', Ukupno_dugovanje, Vrijeme, RacunID FROM Promjena_dugovanja WHERE KupacID = @KupacID ORDER BY Vrijeme DESC", con);
+            cmd = new SqlCommand("SELECT Iznos AS 'Iznos promjene', Ukupno_dugovanje AS 'Ukupno dugovanje', Vrijeme, RacunID FROM Promjena_dugovanja WHERE KupacID = @KupacID ORDER BY Vrijeme DESC", con);
             cmd.Parameters.AddWithValue("@KupacID", kupacID);
             adapt = new SqlDataAdapter(cmd);
             popisPromjena = new DataTable();
@@ -67,7 +67,7 @@ namespace EasyStorage
             sakrijRacun();
             //graf
             con.Open();
-            cmd = new SqlCommand("SELECT Iznos AS 'Iznos promjene', Ukupno_dugovanje, Vrijeme, RacunID FROM Promjena_dugovanja WHERE KupacID = @KupacID", con);
+            cmd = new SqlCommand("SELECT Iznos AS 'Iznos promjene', Ukupno_dugovanje AS 'Ukupno dugovanje', Vrijeme, RacunID FROM Promjena_dugovanja WHERE KupacID = @KupacID", con);
             cmd.Parameters.AddWithValue("@KupacID", kupacID);
             adapt = new SqlDataAdapter(cmd);
             popisPromjena = new DataTable();
@@ -82,7 +82,7 @@ namespace EasyStorage
             graf.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             foreach (DataRow row in popisPromjena.Rows)
             {
-                graf.Series[0].Points.AddXY(row["Vrijeme"].ToString().Split(' ')[0], row["Ukupno_dugovanje"].ToString());
+                graf.Series[0].Points.AddXY(row["Vrijeme"].ToString().Split(' ')[0], row["Ukupno dugovanje"].ToString());
             }
         }
         private void sakrijRacun()
@@ -93,7 +93,7 @@ namespace EasyStorage
         private void prikaziRacun(int id)
         {
             con.Open();
-            cmd = new SqlCommand("SELECT Artikls.Naziv, Artikls.Datum, Stavka_racuna.Kolicina, Stavka_racuna.Cijena, Artikls.ID FROM Artikls, Stavka_racuna WHERE Artikls.ID = Stavka_racuna.ArtiklID AND Stavka_racuna.RacunID = @RacunID", con);
+            cmd = new SqlCommand("SELECT Artikls.Naziv, Artikls.Datum, Stavka_racuna.Kolicina AS 'Količina (kg)', Stavka_racuna.Cijena AS 'Cijena (kn/kg)', Artikls.ID FROM Artikls, Stavka_racuna WHERE Artikls.ID = Stavka_racuna.ArtiklID AND Stavka_racuna.RacunID = @RacunID", con);
             cmd.Parameters.AddWithValue("@RacunID", id);
             adapt = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
