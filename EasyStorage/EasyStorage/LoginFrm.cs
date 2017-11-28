@@ -38,7 +38,13 @@ namespace EasyStorage
             }
             this.Hide();
             var form2 = new MainFrm(str);
-            form2.Closed += (s, args) => this.Close();
+            form2.Closed += (s, args) =>
+            {
+                KImeTxtbx.Text = "";
+                LozinkaTxtbx.Text = "";
+                this.ActiveControl = KImeTxtbx;
+                this.Show();
+            };
             form2.Show();
         }
     }
