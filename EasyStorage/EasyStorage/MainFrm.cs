@@ -94,7 +94,7 @@ namespace EasyStorage
             }
             else
             {
-                MessageBox.Show("Neka mrkva");
+                MessageBox.Show("error");
             }
         }
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
