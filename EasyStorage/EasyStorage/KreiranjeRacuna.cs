@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.Data;
+﻿using System.Data;
 using System.Windows.Forms;
-using System.Windows;
 
 namespace EasyStorage
 {
     class KreiranjeRacuna
     {
-        private static SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=EasyStorageDB;Integrated Security=true;");
-        private static SqlCommand cmd;
-        private static SqlDataAdapter adapt;
         private static DataTable stavkeRacuna;
         private static int selektiranRed = -1;
         public static int SelektiranRed
@@ -125,31 +115,22 @@ namespace EasyStorage
         }
         public static void DisplayData()
         {
-
-            con.Open();
-            DataTable dt = new DataTable();
-            adapt = new SqlDataAdapter("SELECT Artikli_u_skladistu.Artikl_ID, Artikls.Naziv FROM Artikli_u_skladistu, Artikls WHERE Artikli_u_skladistu.Artikl_ID = Artikls.ID", con);
-            adapt.Fill(dt);
+            DataTable dt = Database.GetDostupniArtikliTable();
             artiklComboBox.Items.Clear();
             foreach (DataRow row in dt.Rows)
             {
                 artiklComboBox.Items.Add(new ArtiklComboBoxItem(row["Naziv"].ToString(), int.Parse(row["Artikl_ID"].ToString())));
             }
-            con.Close();
             artiklComboBox.DropDownStyle = ComboBoxStyle.DropDown;
             artiklComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             artiklComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
-
-            con.Open();
-            dt = new DataTable();
-            adapt = new SqlDataAdapter("SELECT ID, Naziv, OIB FROM Kupacs", con);
-            adapt.Fill(dt);
+            
+            dt = Database.GetKupciDropdownTable();
             kupacComboBox.Items.Clear();
             foreach (DataRow row in dt.Rows)
             {
                 kupacComboBox.Items.Add(new KupacComboBoxItem(row["Naziv"].ToString(), row["OIB"].ToString(), int.Parse(row["ID"].ToString())));
             }
-            con.Close();
             kupacComboBox.DropDownStyle = ComboBoxStyle.DropDown;
             kupacComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             kupacComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
@@ -247,23 +228,8 @@ namespace EasyStorage
                 MessageBox.Show("Nemogu kreirati račun bez stavki!");
                 return;
             }
-            int id;
-            cmd = new SqlCommand("INSERT INTO Racuns(Vrijeme, Kupac_ID, Status) OUTPUT INSERTED.ID VALUES(@Vrijeme, @Kupac_ID, 'ceka')", con);
-            con.Open();
-            cmd.Parameters.AddWithValue("@Vrijeme", DateTime.Now.ToString());
-            if (kupacComboBox.SelectedItem == null) cmd.Parameters.AddWithValue("@Kupac_ID", DBNull.Value);
-            else cmd.Parameters.AddWithValue("@Kupac_ID", ((KupacComboBoxItem)kupacComboBox.SelectedItem).ID);
-            id = (int)cmd.ExecuteScalar();
-            foreach(DataRow r in stavkeRacuna.Rows)
-            {
-                cmd = new SqlCommand("INSERT INTO Stavka_racuna(Kolicina, Cijena, RacunID, ArtiklID) VALUES (@Kolicina, @Cijena, @RacunID, @ArtiklID)", con);
-                cmd.Parameters.AddWithValue("@Kolicina", r["Količina (kg)"].ToString());
-                cmd.Parameters.AddWithValue("@Cijena", r["Cijena (kn/kg)"].ToString());
-                cmd.Parameters.AddWithValue("@RacunID", id);
-                cmd.Parameters.AddWithValue("@ArtiklID", r["ArtiklID"]);
-                cmd.ExecuteNonQuery();
-            }
-            con.Close();
+            kupacComboBox.SelectedIndex = kupacComboBox.FindStringExact(kupacComboBox.Text);
+            Database.CreateRacun(kupacComboBox.SelectedItem == null ? -1 : ((KupacComboBoxItem)kupacComboBox.SelectedItem).ID, stavkeRacuna); 
             Clear();
         }
     }

@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 
 namespace EasyStorage
 {
     public partial class PrikazDugovanja : Form
     {
-        private SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=EasyStorageDB;Integrated Security=true;");
-        private SqlDataAdapter adapt;
-        private SqlCommand cmd;
         private DataTable popisPromjena;
         private int selektiranRed = -1;
         private int SelektiranRed
@@ -36,13 +25,7 @@ namespace EasyStorage
         {
             InitializeComponent();
             naslov.Text = s;
-            con.Open();
-            cmd = new SqlCommand("SELECT Iznos AS 'Iznos promjene', Ukupno_dugovanje AS 'Ukupno dugovanje', Vrijeme, RacunID FROM Promjena_dugovanja WHERE KupacID = @KupacID ORDER BY Vrijeme DESC", con);
-            cmd.Parameters.AddWithValue("@KupacID", kupacID);
-            adapt = new SqlDataAdapter(cmd);
-            popisPromjena = new DataTable();
-            adapt.Fill(popisPromjena);
-            con.Close();
+            popisPromjena = Database.GetPromjenaDugovanjaForKupacOrderedByVrijemeTable(kupacID);
             popisPromjena.Columns.Add("Razlog promjene");
             foreach (DataRow row in popisPromjena.Rows)
             {
@@ -65,14 +48,8 @@ namespace EasyStorage
             DataGridViewPopisPromjena.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             DataGridViewPopisPromjena.Columns[3].Visible = false;
             sakrijRacun();
-            //graf
-            con.Open();
-            cmd = new SqlCommand("SELECT Iznos AS 'Iznos promjene', Ukupno_dugovanje AS 'Ukupno dugovanje', Vrijeme, RacunID FROM Promjena_dugovanja WHERE KupacID = @KupacID", con);
-            cmd.Parameters.AddWithValue("@KupacID", kupacID);
-            adapt = new SqlDataAdapter(cmd);
-            popisPromjena = new DataTable();
-            adapt.Fill(popisPromjena);
-            con.Close();
+            
+            popisPromjena = Database.GetPromjenaDugovanjaForKupacTable(kupacID);
             graf.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
             graf.ChartAreas[0].AxisY.MajorGrid.LineWidth = 1;
             graf.ChartAreas[0].AxisX.IsMarginVisible = false;
@@ -92,12 +69,7 @@ namespace EasyStorage
         }
         private void prikaziRacun(int id)
         {
-            con.Open();
-            cmd = new SqlCommand("SELECT Artikls.Naziv, Artikls.Datum, Stavka_racuna.Kolicina AS 'Količina (kg)', Stavka_racuna.Cijena AS 'Cijena (kn/kg)', Artikls.ID FROM Artikls, Stavka_racuna WHERE Artikls.ID = Stavka_racuna.ArtiklID AND Stavka_racuna.RacunID = @RacunID", con);
-            cmd.Parameters.AddWithValue("@RacunID", id);
-            adapt = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            adapt.Fill(dt);
+            DataTable dt = Database.GetArtiklsForRacunTable(id);
             DataGridViewRacun.DataSource = null;
             DataGridViewRacun.DataSource = dt;
             DataGridViewRacun.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -106,7 +78,6 @@ namespace EasyStorage
             DataGridViewRacun.Columns[3].DefaultCellStyle.Format = "0.00##";
             DataGridViewRacun.Columns[4].Visible = false;
             DataGridViewRacun.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            con.Close();
             DataGridViewRacun.Visible = true;
             stavkeRacuna.Visible = true;
         }

@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 
 namespace EasyStorage
 {
     public partial class ArtiklIzvjestaj : Form
     {
-        private SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=EasyStorageDB;Integrated Security=true;");
-        private SqlDataAdapter adapt;
-        private SqlCommand cmd;
-
         public ArtiklIzvjestaj()
         {
             InitializeComponent();
@@ -25,13 +13,7 @@ namespace EasyStorage
         {
             InitializeComponent();
             naslov.Text = s;
-            con.Open();
-            cmd = new SqlCommand("SELECT Stavka_racuna.Cijena, Sum(Stavka_racuna.Kolicina) FROM Stavka_racuna, Racuns WHERE Stavka_racuna.ArtiklID = @ArtiklID AND Racuns.ID = Stavka_racuna.RacunID AND Racuns.Status = 'obraden' GROUP BY Cijena", con);
-            cmd.Parameters.AddWithValue("@ArtiklID", artiklID);
-            adapt = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            adapt.Fill(dt);
-            con.Close();
+            DataTable dt = Database.GetArtikliIzvjestajTable(artiklID);
             graf.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
             graf.ChartAreas[0].AxisY.MajorGrid.LineWidth = 1;
             graf.ChartAreas[0].AxisX.IsMarginVisible = false;
@@ -46,12 +28,7 @@ namespace EasyStorage
                 graf.Series[0].Points.AddXY(row[0].ToString().Split(' ')[0], row[1].ToString());
                 suma += decimal.Parse(row[1].ToString());
             }
-            //if (dt.Rows.Count == 0) return;
-            con.Open();
-            cmd = new SqlCommand("SELECT Nabavljena_kolicina FROM Artikls WHERE ID = @ArtiklID", con);
-            cmd.Parameters.AddWithValue("@ArtiklID", artiklID);
-            decimal ukupno = decimal.Parse(cmd.ExecuteScalar().ToString());
-            con.Close();
+            decimal ukupno = decimal.Parse(Database.GetNabavljenaKolicinaForArtikl(artiklID));
             decimal ostalo = ukupno - suma;
             graf.Series[0].Points.AddXY("nije prodano", ostalo);
         }

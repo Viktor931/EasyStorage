@@ -1,40 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 
 namespace EasyStorage
 {
     public partial class MainFrm : Form
     {
-        private string status = "direktor  ";
-        public MainFrm()
-        {
-            InitializeComponent();
-            Skladiste.DataGridViewArtikli = dataGridViewArtikli;
-            Skladiste.Naziv = NazivArtiklaTxtbx;
-            Skladiste.Kolicina = KolicinaTxtbx;
-            Kupci.DataGridViewKupci = DataGridViewKupci;
-            Kupci.Naziv = NazivKupcaTxtbx;
-            Kupci.Dugovanje = DugovanjeTxtbx;
-            Kupci.OIB = OIBTxtbx;
-            KreiranjeRacuna.DataGridViewStavkaRacuna = DataGridViewStavkaRacuna;
-            KreiranjeRacuna.ArtiklComboBox = ArtiklComboBox;
-            KreiranjeRacuna.KupacComboBox = KupacComboBox;
-            KreiranjeRacuna.CijenaTxtbx = CijenaTxtbx;
-            KreiranjeRacuna.KolicinaTxtbx = KolicinaStavkaTxtbx;
-            NaplataRacuna.DataGridViewNeobradeniRacuni = DataGridViewNeobradeniRacuni;
-            NaplataRacuna.DataGridViewStavkeRacuna = DataGridViewStavkeRacuna;
-
-            tabControl1.SelectTab(0);
-            Skladiste.DisplayData();
-        }
+        private string status;
         public MainFrm(string s)
         {
             status = s;
@@ -88,6 +59,7 @@ namespace EasyStorage
                 KreiranjeRacuna.KolicinaTxtbx = KolicinaStavkaTxtbx;
                 NaplataRacuna.DataGridViewNeobradeniRacuni = DataGridViewNeobradeniRacuni;
                 NaplataRacuna.DataGridViewStavkeRacuna = DataGridViewStavkeRacuna;
+                IzvjestajOArtiklima.DataGridViewIzvjestajOArtiklima = DataGridViewArtikliIzvjesca;
 
                 tabControl1.SelectTab(0);
                 Skladiste.DisplayData();
@@ -117,17 +89,7 @@ namespace EasyStorage
             }
             else if(e.TabPage.Text == "Izvještaji o artiklima")
             {
-                SqlConnection con = new SqlConnection("Data Source=localhost;Initial Catalog=EasyStorageDB;Integrated Security=true;");
-                con.Open();
-                DataTable dt = new DataTable();
-                SqlDataAdapter adapt = new SqlDataAdapter("SELECT ID, Naziv, Datum FROM Artikls ORDER BY Datum DESC", con);
-                adapt.Fill(dt);
-                DataGridViewArtikliIzvjesca.DataSource = dt;
-                DataGridViewArtikliIzvjesca.Columns[0].Visible = false;
-                DataGridViewArtikliIzvjesca.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                DataGridViewArtikliIzvjesca.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                DataGridViewArtikliIzvjesca.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                con.Close();
+                IzvjestajOArtiklima.DisplayData();
             }
         }
         //eventi za tab artikli
