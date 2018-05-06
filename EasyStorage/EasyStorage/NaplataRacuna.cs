@@ -6,18 +6,19 @@ namespace EasyStorage
 {
     class NaplataRacuna
     {
-        private static DataGridView dataGridViewNeobradeniRacuni;
-        public static DataGridView DataGridViewNeobradeniRacuni
+        private MainDatabase database = DatabaseImpl.GetMainDatabase();
+        private DataGridView dataGridViewNeobradeniRacuni;
+        public DataGridView DataGridViewNeobradeniRacuni
         {
             set { dataGridViewNeobradeniRacuni = value; }
         }
-        private static DataGridView dataGridViewStavkeRacuna;
-        public static DataGridView DataGridViewStavkeRacuna
+        private DataGridView dataGridViewStavkeRacuna;
+        public DataGridView DataGridViewStavkeRacuna
         {
             set { dataGridViewStavkeRacuna = value; }
         }
-        private static int selektiranRacunID = -1;
-        public static int SelektiranRacunID
+        private int selektiranRacunID = -1;
+        public int SelektiranRacunID
         {
             set
             {
@@ -29,7 +30,7 @@ namespace EasyStorage
                 else
                 {
                     selektiranRacunID = value;
-                    DataTable dt = Database.GetArtiklsForRacunTable(selektiranRacunID);
+                    DataTable dt = database.GetArtiklsForRacunTable(selektiranRacunID);
                     dataGridViewStavkeRacuna.DataSource = null;
                     dataGridViewStavkeRacuna.DataSource = dt;
                     dataGridViewStavkeRacuna.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -43,10 +44,19 @@ namespace EasyStorage
             }
             get { return selektiranRacunID; }
         }
-
-        public static void DisplayData()
+        private static NaplataRacuna naplataRacuna;
+        public static NaplataRacuna GetNaplataRacuna()
         {
-            DataTable dt = Database.GetRacunsTable();
+            if(naplataRacuna == null)
+            {
+                naplataRacuna = new NaplataRacuna();
+            }
+            return naplataRacuna;
+        }
+        private NaplataRacuna() { }
+        public void DisplayData()
+        {
+            DataTable dt = database.GetRacunsTable();
             dataGridViewNeobradeniRacuni.DataSource = dt;
             dataGridViewNeobradeniRacuni.Columns[0].Visible = false;
             dataGridViewNeobradeniRacuni.Columns[1].Visible = false;
@@ -58,11 +68,11 @@ namespace EasyStorage
             dataGridViewStavkeRacuna.DataSource = null;
         }
         
-        public static void PonistiRacun()
+        public void PonistiRacun()
         {
             if (selektiranRacunID >= 0)
             {
-                Database.DeteleFromRacuns(selektiranRacunID);
+                database.DeteleFromRacuns(selektiranRacunID);
                 DisplayData();
                 selektiranRacunID = -1;
                 dataGridViewStavkeRacuna.DataSource = null;
@@ -72,11 +82,11 @@ namespace EasyStorage
                 MessageBox.Show("Račun nije selektiran!");
             }
         }
-        public static void RacunPlacen()
+        public void RacunPlacen()
         {
             if (selektiranRacunID >= 0)
             {
-                Database.AzurirajStanjeRacunaISkladista(selektiranRacunID, dataGridViewStavkeRacuna.Rows);
+                database.AzurirajStanjeRacunaISkladista(selektiranRacunID, dataGridViewStavkeRacuna.Rows);
                 DisplayData();
                 selektiranRacunID = -1;
                 dataGridViewStavkeRacuna.DataSource = null;
@@ -86,7 +96,7 @@ namespace EasyStorage
                 MessageBox.Show("Račun nije selektiran!");
             }
         }
-        public static void OdgodaPlacanja()
+        public void OdgodaPlacanja()
         {
             if(selektiranRacunID == -1)
             {
@@ -103,7 +113,7 @@ namespace EasyStorage
             {
                 suma += Convert.ToDecimal(row.Cells[3].Value.ToString()) * Convert.ToDecimal(row.Cells[2].Value.ToString());
             }
-            Database.PovecajDugKupca(suma, Convert.ToInt32(dataGridViewNeobradeniRacuni.SelectedRows[0].Cells["KupacID"].Value.ToString()), selektiranRacunID);
+            database.PovecajDugKupca(suma, Convert.ToInt32(dataGridViewNeobradeniRacuni.SelectedRows[0].Cells["KupacID"].Value.ToString()), selektiranRacunID);
             RacunPlacen();
         }
     }

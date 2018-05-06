@@ -5,6 +5,7 @@ namespace EasyStorage
 {
     public partial class PrikazDugovanja : Form
     {
+        private MainDatabase database = DatabaseImpl.GetMainDatabase();
         private DataTable popisPromjena;
         private int selektiranRed = -1;
         private int SelektiranRed
@@ -25,7 +26,7 @@ namespace EasyStorage
         {
             InitializeComponent();
             naslov.Text = s;
-            popisPromjena = Database.GetPromjenaDugovanjaForKupacOrderedByVrijemeTable(kupacID);
+            popisPromjena = database.GetPromjenaDugovanjaForKupacOrderedByVrijemeTable(kupacID);
             popisPromjena.Columns.Add("Razlog promjene");
             foreach (DataRow row in popisPromjena.Rows)
             {
@@ -49,7 +50,7 @@ namespace EasyStorage
             DataGridViewPopisPromjena.Columns[3].Visible = false;
             sakrijRacun();
             
-            popisPromjena = Database.GetPromjenaDugovanjaForKupacTable(kupacID);
+            popisPromjena = database.GetPromjenaDugovanjaForKupacTable(kupacID);
             graf.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
             graf.ChartAreas[0].AxisY.MajorGrid.LineWidth = 1;
             graf.ChartAreas[0].AxisX.IsMarginVisible = false;
@@ -69,7 +70,7 @@ namespace EasyStorage
         }
         private void prikaziRacun(int id)
         {
-            DataTable dt = Database.GetArtiklsForRacunTable(id);
+            DataTable dt = database.GetArtiklsForRacunTable(id);
             DataGridViewRacun.DataSource = null;
             DataGridViewRacun.DataSource = dt;
             DataGridViewRacun.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

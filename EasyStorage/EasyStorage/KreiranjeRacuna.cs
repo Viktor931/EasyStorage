@@ -5,9 +5,10 @@ namespace EasyStorage
 {
     class KreiranjeRacuna
     {
-        private static DataTable stavkeRacuna;
-        private static int selektiranRed = -1;
-        public static int SelektiranRed
+        private MainDatabase database = DatabaseImpl.GetMainDatabase();
+        private DataTable stavkeRacuna;
+        private int selektiranRed = -1;
+        public int SelektiranRed
         {
             set
             {
@@ -19,37 +20,47 @@ namespace EasyStorage
                 else selektiranRed = value;
             }
         }
-        private static DataGridView dataGridViewStavkaRacuna;
-        public static DataGridView DataGridViewStavkaRacuna
+        private DataGridView dataGridViewStavkaRacuna;
+        public DataGridView DataGridViewStavkaRacuna
         {
             set { dataGridViewStavkaRacuna = value; }
         }
-        private static ComboBox kupacComboBox;
-        public static ComboBox KupacComboBox
+        private ComboBox kupacComboBox;
+        public ComboBox KupacComboBox
         {
             set
             {
                 kupacComboBox = value;
             }
         }
-        private static ComboBox artiklComboBox;
-        public static ComboBox ArtiklComboBox
+        private ComboBox artiklComboBox;
+        public ComboBox ArtiklComboBox
         {
             set
             {
                 artiklComboBox = value;
             }
         }
-        private static TextBox kolicinaTxtbx;
-        public static TextBox KolicinaTxtbx
+        private TextBox kolicinaTxtbx;
+        public TextBox KolicinaTxtbx
         {
             set { kolicinaTxtbx = value; }
         }
-        private static TextBox cijenaTxtbx;
-        public static TextBox CijenaTxtbx
+        private TextBox cijenaTxtbx;
+        public TextBox CijenaTxtbx
         {
             set { cijenaTxtbx = value; }
         }
+        private static KreiranjeRacuna kreiranjeRacuna;
+        public static KreiranjeRacuna GetKreiranjeRacuna()
+        {
+            if(kreiranjeRacuna == null)
+            {
+                kreiranjeRacuna = new KreiranjeRacuna();
+            }
+            return kreiranjeRacuna;
+        }
+        private KreiranjeRacuna() { }
 
         class KupacComboBoxItem
         {
@@ -82,13 +93,13 @@ namespace EasyStorage
             }
         }
 
-        public static void ClearFields()
+        public void ClearFields()
         {
             artiklComboBox.Text = "";
             kolicinaTxtbx.Text = "";
             cijenaTxtbx.Text = "";
         }
-        private static void inicijalizirajStavke()
+        private void inicijalizirajStavke()
         {
             stavkeRacuna = new DataTable();
             DataColumn stupac;
@@ -113,9 +124,9 @@ namespace EasyStorage
             stupac.ColumnName = "Cijena (kn/kg)";
             stavkeRacuna.Columns.Add(stupac);
         }
-        public static void DisplayData()
+        public void DisplayData()
         {
-            DataTable dt = Database.GetDostupniArtikliTable();
+            DataTable dt = database.GetDostupniArtikliTable();
             artiklComboBox.Items.Clear();
             foreach (DataRow row in dt.Rows)
             {
@@ -125,7 +136,7 @@ namespace EasyStorage
             artiklComboBox.AutoCompleteSource = AutoCompleteSource.ListItems;
             artiklComboBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             
-            dt = Database.GetKupciDropdownTable();
+            dt = database.GetKupciDropdownTable();
             kupacComboBox.Items.Clear();
             foreach (DataRow row in dt.Rows)
             {
@@ -146,7 +157,7 @@ namespace EasyStorage
             dataGridViewStavkaRacuna.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridViewStavkaRacuna.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
-        public static void DodajStavku()
+        public void DodajStavku()
         {
             float f;
             if(!float.TryParse(kolicinaTxtbx.Text, out f))
@@ -202,7 +213,7 @@ namespace EasyStorage
             DisplayData();
             ClearFields();
         }
-        public static void PonistiStavku()
+        public void PonistiStavku()
         {
             if(selektiranRed == -1)
             {
@@ -212,7 +223,7 @@ namespace EasyStorage
             stavkeRacuna.Rows[selektiranRed].Delete();
             DisplayData();
         }
-        public static void Clear()
+        public void Clear()
         {
             selektiranRed = -1;
             stavkeRacuna = null;
@@ -221,7 +232,7 @@ namespace EasyStorage
             ClearFields();
             DisplayData();
         }
-        public static void KreirajRacun()
+        public void KreirajRacun()
         {
             if(stavkeRacuna.Rows.Count == 0)
             {
@@ -229,7 +240,7 @@ namespace EasyStorage
                 return;
             }
             kupacComboBox.SelectedIndex = kupacComboBox.FindStringExact(kupacComboBox.Text);
-            Database.CreateRacun(kupacComboBox.SelectedItem == null ? -1 : ((KupacComboBoxItem)kupacComboBox.SelectedItem).ID, stavkeRacuna); 
+            database.CreateRacun(kupacComboBox.SelectedItem == null ? -1 : ((KupacComboBoxItem)kupacComboBox.SelectedItem).ID, stavkeRacuna); 
             Clear();
         }
     }

@@ -5,35 +5,46 @@ namespace EasyStorage
 {
     class Skladiste
     {
-        private static int artiklID = -1;
-        public static int ArtiklID
+        private MainDatabase database = DatabaseImpl.GetMainDatabase();
+        private int artiklID = -1;
+        public int ArtiklID
         {
             get { return artiklID; }
             set { artiklID = value; }
         }
-        private static DataGridView dataGridViewArtikli;
-        public static DataGridView DataGridViewArtikli
+        private DataGridView dataGridViewArtikli;
+        public DataGridView DataGridViewArtikli
         {
             set { dataGridViewArtikli = value; }
         }
-        private static TextBox kolicina;
-        public static TextBox Kolicina
+        private TextBox kolicina;
+        public TextBox Kolicina
         {
             set { kolicina = value; }
         }
-        private static TextBox naziv;
-        public static TextBox Naziv
+        private TextBox naziv;
+        public TextBox Naziv
         {
             set { naziv = value; }
         }
-        public static void ClearFields()
+        private static Skladiste skladiste;
+        public static Skladiste GetSkladiste()
+        {
+            if(skladiste == null)
+            {
+                skladiste = new Skladiste();
+            }
+            return skladiste;
+        }
+        private Skladiste() { }
+        public void ClearFields()
         {
             kolicina.Text = "";
             naziv.Text = "";
         }
-        public static void DisplayData()
+        public void DisplayData()
         {
-            DataTable dt = Database.GetSkladisteTable();
+            DataTable dt = database.GetSkladisteTable();
             dataGridViewArtikli.DataSource = dt;
             dataGridViewArtikli.Columns[0].Visible = false;
             dataGridViewArtikli.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -41,15 +52,15 @@ namespace EasyStorage
             dataGridViewArtikli.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridViewArtikli.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
-        public static void Dodaj()
+        public void Dodaj()
         {
             if (naziv.Text != "" || kolicina.Text != "")
             {
                 float f;
                 if (float.TryParse(kolicina.Text, out f) && f >= 0)
                 {
-                    Database.CreateArtikl(naziv.Text, kolicina.Text);
-                    Skladiste.DisplayData();
+                    database.CreateArtikl(naziv.Text, kolicina.Text);
+                    this.DisplayData();
                     ClearFields();
                 }
                 else
@@ -63,7 +74,7 @@ namespace EasyStorage
                 MessageBox.Show("Oba polja moraju biti popunjena");
             }
         }
-        public static void Azuriraj()
+        public void Azuriraj()
         {
             if (kolicina.Text != "" || naziv.Text != "")
             {
@@ -72,9 +83,9 @@ namespace EasyStorage
                 {
                     if (ArtiklID >= 0)
                     {
-                        if(Database.IsArtiklNaSkladistu(ArtiklID))
+                        if(database.IsArtiklNaSkladistu(ArtiklID))
                         {
-                            Database.UpdateArtikl(ArtiklID, naziv.Text);
+                            database.UpdateArtikl(ArtiklID, naziv.Text);
                             DisplayData();
                             ClearFields();
                             ArtiklID = -1;
@@ -101,12 +112,12 @@ namespace EasyStorage
                 MessageBox.Show("Polja ne smiju biti prazna");
             }
         }
-        public static void Obrisi()
+        public void Obrisi()
         {
             if (ArtiklID >= 0)
             {
-                Database.DeteleFromArtikls(ArtiklID);
-                Skladiste.DisplayData();
+                database.DeteleFromArtikls(ArtiklID);
+                this.DisplayData();
                 ClearFields();
                 ArtiklID = -1;
             }

@@ -5,6 +5,7 @@ namespace EasyStorage
 {
     public partial class ArtiklIzvjestaj : Form
     {
+        private MainDatabase database = DatabaseImpl.GetMainDatabase();
         public ArtiklIzvjestaj()
         {
             InitializeComponent();
@@ -13,7 +14,7 @@ namespace EasyStorage
         {
             InitializeComponent();
             naslov.Text = s;
-            DataTable dt = Database.GetArtikliIzvjestajTable(artiklID);
+            DataTable dt = database.GetArtikliIzvjestajTable(artiklID);
             graf.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
             graf.ChartAreas[0].AxisY.MajorGrid.LineWidth = 1;
             graf.ChartAreas[0].AxisX.IsMarginVisible = false;
@@ -28,7 +29,7 @@ namespace EasyStorage
                 graf.Series[0].Points.AddXY(row[0].ToString().Split(' ')[0], row[1].ToString());
                 suma += decimal.Parse(row[1].ToString());
             }
-            decimal ukupno = decimal.Parse(Database.GetNabavljenaKolicinaForArtikl(artiklID));
+            decimal ukupno = decimal.Parse(database.GetNabavljenaKolicinaForArtikl(artiklID));
             decimal ostalo = ukupno - suma;
             graf.Series[0].Points.AddXY("nije prodano", ostalo);
         }

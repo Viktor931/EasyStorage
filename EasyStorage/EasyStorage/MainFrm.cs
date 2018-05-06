@@ -5,6 +5,11 @@ namespace EasyStorage
 {
     public partial class MainFrm : Form
     {
+        private Skladiste skladiste;
+        private Kupci kupci;
+        private KreiranjeRacuna kreiranjeRacuna;
+        private NaplataRacuna naplataRacuna;
+        private IzvjestajOArtiklima izvjestajOArtiklima;
         private string status;
         public MainFrm(string s)
         {
@@ -12,57 +17,66 @@ namespace EasyStorage
             InitializeComponent();
             if(s == "blagajnik ")
             {
-                NaplataRacuna.DataGridViewNeobradeniRacuni = DataGridViewNeobradeniRacuni;
-                NaplataRacuna.DataGridViewStavkeRacuna = DataGridViewStavkeRacuna;
+                naplataRacuna = NaplataRacuna.GetNaplataRacuna();
+                naplataRacuna.DataGridViewNeobradeniRacuni = DataGridViewNeobradeniRacuni;
+                naplataRacuna.DataGridViewStavkeRacuna = DataGridViewStavkeRacuna;
 
                 tabControl1.TabPages.RemoveByKey("SkladisteTab");
                 tabControl1.TabPages.RemoveByKey("KupciTab");
                 tabControl1.TabPages.RemoveByKey("KreiranjeRacunaTab");
                 tabControl1.TabPages.RemoveByKey("IzvjestajiOArtiklima");
                 tabControl1.SelectTab(0);
-                NaplataRacuna.DisplayData();
+                naplataRacuna.DisplayData();
             }
             else if(s == "skladistar")
             {
-                Skladiste.DataGridViewArtikli = dataGridViewArtikli;
-                Skladiste.Naziv = NazivArtiklaTxtbx;
-                Skladiste.Kolicina = KolicinaTxtbx;
-                Kupci.DataGridViewKupci = DataGridViewKupci;
-                Kupci.Naziv = NazivKupcaTxtbx;
-                Kupci.Dugovanje = DugovanjeTxtbx;
-                Kupci.OIB = OIBTxtbx;
-                KreiranjeRacuna.DataGridViewStavkaRacuna = DataGridViewStavkaRacuna;
-                KreiranjeRacuna.ArtiklComboBox = ArtiklComboBox;
-                KreiranjeRacuna.KupacComboBox = KupacComboBox;
-                KreiranjeRacuna.CijenaTxtbx = CijenaTxtbx;
-                KreiranjeRacuna.KolicinaTxtbx = KolicinaStavkaTxtbx;
+                skladiste = Skladiste.GetSkladiste();
+                skladiste.DataGridViewArtikli = dataGridViewArtikli;
+                skladiste.Naziv = NazivArtiklaTxtbx;
+                skladiste.Kolicina = KolicinaTxtbx;
+                kupci = Kupci.GetKupci();
+                kupci.DataGridViewKupci = DataGridViewKupci;
+                kupci.Naziv = NazivKupcaTxtbx;
+                kupci.Dugovanje = DugovanjeTxtbx;
+                kupci.OIB = OIBTxtbx;
+                kreiranjeRacuna = KreiranjeRacuna.GetKreiranjeRacuna();
+                kreiranjeRacuna.DataGridViewStavkaRacuna = DataGridViewStavkaRacuna;
+                kreiranjeRacuna.ArtiklComboBox = ArtiklComboBox;
+                kreiranjeRacuna.KupacComboBox = KupacComboBox;
+                kreiranjeRacuna.CijenaTxtbx = CijenaTxtbx;
+                kreiranjeRacuna.KolicinaTxtbx = KolicinaStavkaTxtbx;
 
 
                 tabControl1.TabPages.RemoveByKey("NaplataRacunaTab");
                 tabControl1.TabPages.RemoveByKey("IzvjestajiOArtiklima");
                 tabControl1.SelectTab(2);
-                KreiranjeRacuna.DisplayData();
+                kreiranjeRacuna.DisplayData();
             }
             else if(s == "direktor  ")
             {
-                Skladiste.DataGridViewArtikli = dataGridViewArtikli;
-                Skladiste.Naziv = NazivArtiklaTxtbx;
-                Skladiste.Kolicina = KolicinaTxtbx;
-                Kupci.DataGridViewKupci = DataGridViewKupci;
-                Kupci.Naziv = NazivKupcaTxtbx;
-                Kupci.Dugovanje = DugovanjeTxtbx;
-                Kupci.OIB = OIBTxtbx;
-                KreiranjeRacuna.DataGridViewStavkaRacuna = DataGridViewStavkaRacuna;
-                KreiranjeRacuna.ArtiklComboBox = ArtiklComboBox;
-                KreiranjeRacuna.KupacComboBox = KupacComboBox;
-                KreiranjeRacuna.CijenaTxtbx = CijenaTxtbx;
-                KreiranjeRacuna.KolicinaTxtbx = KolicinaStavkaTxtbx;
-                NaplataRacuna.DataGridViewNeobradeniRacuni = DataGridViewNeobradeniRacuni;
-                NaplataRacuna.DataGridViewStavkeRacuna = DataGridViewStavkeRacuna;
-                IzvjestajOArtiklima.DataGridViewIzvjestajOArtiklima = DataGridViewArtikliIzvjesca;
+                skladiste = Skladiste.GetSkladiste();
+                skladiste.DataGridViewArtikli = dataGridViewArtikli;
+                skladiste.Naziv = NazivArtiklaTxtbx;
+                skladiste.Kolicina = KolicinaTxtbx;
+                kupci = Kupci.GetKupci();
+                kupci.DataGridViewKupci = DataGridViewKupci;
+                kupci.Naziv = NazivKupcaTxtbx;
+                kupci.Dugovanje = DugovanjeTxtbx;
+                kupci.OIB = OIBTxtbx;
+                kreiranjeRacuna = KreiranjeRacuna.GetKreiranjeRacuna();
+                kreiranjeRacuna.DataGridViewStavkaRacuna = DataGridViewStavkaRacuna;
+                kreiranjeRacuna.ArtiklComboBox = ArtiklComboBox;
+                kreiranjeRacuna.KupacComboBox = KupacComboBox;
+                kreiranjeRacuna.CijenaTxtbx = CijenaTxtbx;
+                kreiranjeRacuna.KolicinaTxtbx = KolicinaStavkaTxtbx;
+                naplataRacuna = NaplataRacuna.GetNaplataRacuna();
+                naplataRacuna.DataGridViewNeobradeniRacuni = DataGridViewNeobradeniRacuni;
+                naplataRacuna.DataGridViewStavkeRacuna = DataGridViewStavkeRacuna;
+                izvjestajOArtiklima = IzvjestajOArtiklima.GetIzvjestajOArtiklima();
+                izvjestajOArtiklima.DataGridViewIzvjestajOArtiklima = DataGridViewArtikliIzvjesca;
 
                 tabControl1.SelectTab(0);
-                Skladiste.DisplayData();
+                skladiste.DisplayData();
             }
             else
             {
@@ -73,39 +87,39 @@ namespace EasyStorage
         {
             if (e.TabPage.Text == "Skladište")
             {
-                Skladiste.DisplayData();
+                skladiste.DisplayData();
             }
             else if (e.TabPage.Text == "Kupci")
             {
-                Kupci.DisplayData();
+                kupci.DisplayData();
             }
             else if (e.TabPage.Text == "Kreiranje računa")
             {
-                KreiranjeRacuna.DisplayData();
+                kreiranjeRacuna.DisplayData();
             }
             else if (e.TabPage.Text == "Naplata računa")
             {
-                NaplataRacuna.DisplayData();
+                naplataRacuna.DisplayData();
             }
             else if(e.TabPage.Text == "Izvještaji o artiklima")
             {
-                IzvjestajOArtiklima.DisplayData();
+                izvjestajOArtiklima.DisplayData();
             }
         }
         //eventi za tab artikli
         private void DodajBtn_Click(object sender, EventArgs e)
         {
-            Skladiste.Dodaj();
+            skladiste.Dodaj();
         }
 
         private void AzurirajBtn_Click(object sender, EventArgs e)
         {
-            Skladiste.Azuriraj();
+            skladiste.Azuriraj();
         }
 
         private void ObrisiBtn_Click(object sender, EventArgs e)
         {
-            Skladiste.Obrisi();
+            skladiste.Obrisi();
         }
 
         private void dataGridViewArtikli_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -115,16 +129,16 @@ namespace EasyStorage
                 return;
             }
             int id = Convert.ToInt32(dataGridViewArtikli.Rows[e.RowIndex].Cells[0].Value.ToString());
-            if (id == Skladiste.ArtiklID)
+            if (id == skladiste.ArtiklID)
             {
-                Skladiste.ArtiklID = -1;
-                Skladiste.ClearFields();
+                skladiste.ArtiklID = -1;
+                skladiste.ClearFields();
                 dataGridViewArtikli.Rows[e.RowIndex].Selected = false;
                 return;
             }
             else
             {
-                Skladiste.ArtiklID = id;
+                skladiste.ArtiklID = id;
                 NazivArtiklaTxtbx.Text = dataGridViewArtikli.Rows[e.RowIndex].Cells[1].Value.ToString();
                 KolicinaTxtbx.Text = dataGridViewArtikli.Rows[e.RowIndex].Cells[3].Value.ToString();
             }
@@ -133,17 +147,17 @@ namespace EasyStorage
         private void dataGridViewArtikli_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dataGridViewArtikli.ClearSelection();
-            Skladiste.ClearFields();
+            skladiste.ClearFields();
         }
         //eventi za tab kupci
         private void KupciDodajBtn_Click(object sender, EventArgs e)
         {
-            Kupci.Dodaj();
+            kupci.Dodaj();
         }
 
         private void KupciAzurirajBtn_Click(object sender, EventArgs e)
         {
-            Kupci.Azuriraj();
+            kupci.Azuriraj();
         }
 
         private void DataGridViewKupci_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -153,16 +167,16 @@ namespace EasyStorage
                 return;
             }
             int id = Convert.ToInt32(DataGridViewKupci.Rows[e.RowIndex].Cells[0].Value.ToString());
-            if (id == Kupci.KupacID)
+            if (id == kupci.KupacID)
             {
-                Kupci.KupacID = -1;
-                Kupci.ClearFields();
+                kupci.KupacID = -1;
+                kupci.ClearFields();
                 DataGridViewKupci.Rows[e.RowIndex].Selected = false;
                 return;
             }
             else
             {
-                Kupci.KupacID = id;
+                kupci.KupacID = id;
                 NazivKupcaTxtbx.Text = DataGridViewKupci.Rows[e.RowIndex].Cells[1].Value.ToString();
                 OIBTxtbx.Text = DataGridViewKupci.Rows[e.RowIndex].Cells[2].Value.ToString();
                 DugovanjeTxtbx.Text = DataGridViewKupci.Rows[e.RowIndex].Cells[3].Value.ToString().Substring(0, DataGridViewKupci.Rows[e.RowIndex].Cells[3].Value.ToString().Length - 2);
@@ -185,13 +199,13 @@ namespace EasyStorage
         private void DataGridViewKupci_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             DataGridViewKupci.ClearSelection();
-            Kupci.ClearFields();
+            kupci.ClearFields();
         }
 
         //eventi za kreiranje racuna
         private void DodajStavkuRacunaBtn_Click(object sender, EventArgs e)
         {
-            KreiranjeRacuna.DodajStavku();
+            kreiranjeRacuna.DodajStavku();
         }
 
         private void DataGridViewStavkaRacuna_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -201,12 +215,12 @@ namespace EasyStorage
 
         private void DataGridViewStavkaRacuna_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            KreiranjeRacuna.SelektiranRed = e.RowIndex;
+            kreiranjeRacuna.SelektiranRed = e.RowIndex;
         }
 
         private void PonistiStavkuRacunaBtn_Click(object sender, EventArgs e)
         {
-            KreiranjeRacuna.PonistiStavku();
+            kreiranjeRacuna.PonistiStavku();
         }
 
         private void ArtiklComboBox_KeyDown(object sender, KeyEventArgs e)
@@ -220,33 +234,33 @@ namespace EasyStorage
 
         private void PonistiRacunBtn_Click(object sender, EventArgs e)
         {
-            KreiranjeRacuna.Clear();
+            kreiranjeRacuna.Clear();
         }
 
         private void KreirajRacunBtn_Click(object sender, EventArgs e)
         {
-            KreiranjeRacuna.KreirajRacun();
+            kreiranjeRacuna.KreirajRacun();
         }
 
         private void OsvjeziBtn1_Click(object sender, EventArgs e)
         {
-            KreiranjeRacuna.DisplayData();
+            kreiranjeRacuna.DisplayData();
         }
 
         //Eventi za naplatu racuna
         private void RacunPlacenBtn_Click(object sender, EventArgs e)
         {
-            NaplataRacuna.RacunPlacen();
+            naplataRacuna.RacunPlacen();
         }
 
         private void PonistiRacunBtn1_Click(object sender, EventArgs e)
         {
-            NaplataRacuna.PonistiRacun();
+            naplataRacuna.PonistiRacun();
         }
 
         private void OdgodaPlacanjaBtn_Click(object sender, EventArgs e)
         {
-            NaplataRacuna.OdgodaPlacanja();
+            naplataRacuna.OdgodaPlacanja();
         }
 
         private void DataGridViewNeobradeniRacuni_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -256,8 +270,8 @@ namespace EasyStorage
 
         private void DataGridViewNeobradeniRacuni_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            NaplataRacuna.SelektiranRacunID = Convert.ToInt32(DataGridViewNeobradeniRacuni.Rows[e.RowIndex].Cells[0].Value.ToString());
-            if (NaplataRacuna.SelektiranRacunID == -1) DataGridViewNeobradeniRacuni.Rows[e.RowIndex].Selected = false;
+            naplataRacuna.SelektiranRacunID = Convert.ToInt32(DataGridViewNeobradeniRacuni.Rows[e.RowIndex].Cells[0].Value.ToString());
+            if (naplataRacuna.SelektiranRacunID == -1) DataGridViewNeobradeniRacuni.Rows[e.RowIndex].Selected = false;
         }
 
         private void DataGridViewStavkeRacuna_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -267,8 +281,8 @@ namespace EasyStorage
 
         private void OsvjeziBtn_Click(object sender, EventArgs e)
         {
-            NaplataRacuna.DisplayData();
-            NaplataRacuna.SelektiranRacunID = -1;
+            naplataRacuna.DisplayData();
+            naplataRacuna.SelektiranRacunID = -1;
         }
 
         //Eventovi za izvjestaje o artiklima

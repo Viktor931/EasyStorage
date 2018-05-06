@@ -4,41 +4,52 @@ namespace EasyStorage
 {
     class Kupci
     {
-        private static int kupacID = -1;
-        public static int KupacID
+        private MainDatabase database = DatabaseImpl.GetMainDatabase();
+        private int kupacID = -1;
+        public int KupacID
         {
             get { return kupacID; }
             set { kupacID = value; }
         }
-        private static DataGridView dataGridViewKupci;
-        public static DataGridView DataGridViewKupci
+        private DataGridView dataGridViewKupci;
+        public DataGridView DataGridViewKupci
         {
             set { dataGridViewKupci = value; }
         }
-        private static TextBox dugovanje;
-        public static TextBox Dugovanje
+        private TextBox dugovanje;
+        public TextBox Dugovanje
         {
             set { dugovanje = value; }
         }
-        private static TextBox naziv;
-        public static TextBox Naziv
+        private TextBox naziv;
+        public TextBox Naziv
         {
             set { naziv = value; }
         }
-        private static TextBox oib;
-        public static TextBox OIB
+        private TextBox oib;
+        public TextBox OIB
         {
             set { oib = value; }
         }
-        public static void ClearFields()
+        private static Kupci kupci;
+        public static Kupci GetKupci()
+        {
+            if(kupci == null)
+            {
+                kupci = new Kupci();
+            }
+            return kupci;
+        }
+        private Kupci() { }
+        public void ClearFields()
         {
             dugovanje.Text = "";
             naziv.Text = "";
             oib.Text = "";
         }
-        public static void DisplayData()
+        public void DisplayData()
         {
-            dataGridViewKupci.DataSource = Database.GetKupciTable();
+            dataGridViewKupci.DataSource = database.GetKupciTable();
             dataGridViewKupci.Columns[0].Visible = false;
             dataGridViewKupci.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewKupci.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -46,7 +57,7 @@ namespace EasyStorage
             dataGridViewKupci.Columns[3].DefaultCellStyle.Format = "0.00##";
             dataGridViewKupci.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
-        public static void Dodaj()
+        public void Dodaj()
         {
             if (naziv.Text != "" || oib.Text != "")
             {
@@ -59,7 +70,7 @@ namespace EasyStorage
                     {
                         MessageBox.Show("Novokreirani kupac uvijek ima početno dugovanje 0, koristite opciju ažuriraj kako biste promjenili dugovanje!");
                     }
-                    Database.SaveKupac(naziv.Text, oib.Text);
+                    database.SaveKupac(naziv.Text, oib.Text);
                     ClearFields();
                     DisplayData();
                 }
@@ -73,7 +84,7 @@ namespace EasyStorage
                 MessageBox.Show("Oba polja moraju biti popunjena");
             }
         }
-        public static void Azuriraj()
+        public void Azuriraj()
         {
             if (naziv.Text != "" || naziv.Text != "" || oib.Text != "")
             {
@@ -85,7 +96,7 @@ namespace EasyStorage
                     long o;//oib
                     if (long.TryParse(oib.Text, out o) && oib.Text.Length == 11)
                     {
-                        Database.UpdateKupac(naziv.Text, KupacID, oib.Text, dugovanje.Text, dug);
+                        database.UpdateKupac(naziv.Text, KupacID, oib.Text, dugovanje.Text, dug);
                         DisplayData();
                         ClearFields();
                         KupacID = -1;

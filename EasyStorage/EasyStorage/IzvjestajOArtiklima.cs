@@ -4,14 +4,25 @@ namespace EasyStorage
 {
     class IzvjestajOArtiklima
     {
-        private static DataGridView dataGridViewIzvjestajOArtiklima;
-        public static DataGridView DataGridViewIzvjestajOArtiklima
+        private MainDatabase database = DatabaseImpl.GetMainDatabase();
+        private DataGridView dataGridViewIzvjestajOArtiklima;
+        public DataGridView DataGridViewIzvjestajOArtiklima
         {
             set { dataGridViewIzvjestajOArtiklima = value; }
         }
-        public static void DisplayData()
+        private static IzvjestajOArtiklima izvjestajOArtiklima;
+        public static IzvjestajOArtiklima GetIzvjestajOArtiklima()
         {
-            dataGridViewIzvjestajOArtiklima.DataSource = Database.GetIzvjestajOArtiklimaTable();
+            if(izvjestajOArtiklima == null)
+            {
+                izvjestajOArtiklima = new IzvjestajOArtiklima();
+            }
+            return izvjestajOArtiklima;
+        }
+        private IzvjestajOArtiklima() { }
+        public void DisplayData()
+        {
+            dataGridViewIzvjestajOArtiklima.DataSource = database.GetIzvjestajOArtiklimaTable();
             dataGridViewIzvjestajOArtiklima.Columns[0].Visible = false;
             dataGridViewIzvjestajOArtiklima.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewIzvjestajOArtiklima.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

@@ -5,6 +5,7 @@ namespace EasyStorage
 {
     public partial class LoginFrm : Form
     {
+        private KorisnikDatabase database = DatabaseImpl.GetKorisnikDatabase();
         public LoginFrm()
         {
             InitializeComponent();
@@ -12,7 +13,7 @@ namespace EasyStorage
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-            string status = Database.GetKorisnikStatus(KImeTxtbx.Text, LozinkaTxtbx.Text);
+            string status = database.GetKorisnikStatus(KImeTxtbx.Text, LozinkaTxtbx.Text);
             if (string.IsNullOrEmpty(status))
             {
                 KImeTxtbx.Text = "";
