@@ -5,7 +5,7 @@ namespace EasyStorage
 {
     class KreiranjeRacuna
     {
-        private MainDatabase database = DatabaseImpl.GetMainDatabase();
+        private MainDatabase database = Program.GetMainDatabase();
         private DataTable stavkeRacuna;
         private int selektiranRed = -1;
         public int SelektiranRed

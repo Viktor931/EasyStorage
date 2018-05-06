@@ -11,17 +11,9 @@ namespace EasyStorage
         private SqlCommand cmd;
         private SqlDataAdapter adapt;
         private static DatabaseImpl database;
-        public static MainDatabase GetMainDatabase()
+        public static DatabaseImpl GetDatabase()
         {
-            if(database == null)
-            {
-                database = new DatabaseImpl();
-            }
-            return database;
-        }
-        public static KorisnikDatabase GetKorisnikDatabase()
-        {
-            if(database == null)
+            if (database == null)
             {
                 database = new DatabaseImpl();
             }

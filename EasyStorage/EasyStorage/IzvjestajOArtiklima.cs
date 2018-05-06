@@ -4,7 +4,7 @@ namespace EasyStorage
 {
     class IzvjestajOArtiklima
     {
-        private MainDatabase database = DatabaseImpl.GetMainDatabase();
+        private MainDatabase database = Program.GetMainDatabase();
         private DataGridView dataGridViewIzvjestajOArtiklima;
         public DataGridView DataGridViewIzvjestajOArtiklima
         {

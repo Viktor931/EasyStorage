@@ -5,7 +5,7 @@ namespace EasyStorage
 {
     public partial class ArtiklIzvjestaj : Form
     {
-        private MainDatabase database = DatabaseImpl.GetMainDatabase();
+        private MainDatabase database = Program.GetMainDatabase();
         public ArtiklIzvjestaj()
         {
             InitializeComponent();

@@ -6,7 +6,7 @@ namespace EasyStorage
 {
     class NaplataRacuna
     {
-        private MainDatabase database = DatabaseImpl.GetMainDatabase();
+        private MainDatabase database = Program.GetMainDatabase();
         private DataGridView dataGridViewNeobradeniRacuni;
         public DataGridView DataGridViewNeobradeniRacuni
         {

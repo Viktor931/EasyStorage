@@ -5,7 +5,7 @@ namespace EasyStorage
 {
     class Skladiste
     {
-        private MainDatabase database = DatabaseImpl.GetMainDatabase();
+        private MainDatabase database = Program.GetMainDatabase();
         private int artiklID = -1;
         public int ArtiklID
         {

@@ -4,7 +4,7 @@ namespace EasyStorage
 {
     class Kupci
     {
-        private MainDatabase database = DatabaseImpl.GetMainDatabase();
+        private MainDatabase database = Program.GetMainDatabase();
         private int kupacID = -1;
         public int KupacID
         {

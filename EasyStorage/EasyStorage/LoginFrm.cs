@@ -5,7 +5,7 @@ namespace EasyStorage
 {
     public partial class LoginFrm : Form
     {
-        private KorisnikDatabase database = DatabaseImpl.GetKorisnikDatabase();
+        private KorisnikDatabase database = Program.GetKorisnikDatabase();
         public LoginFrm()
         {
             InitializeComponent();

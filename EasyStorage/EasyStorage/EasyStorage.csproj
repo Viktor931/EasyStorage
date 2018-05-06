@@ -55,7 +55,7 @@
     <Compile Include="ArtiklIzvjestaj.Designer.cs">
       <DependentUpon>ArtiklIzvjestaj.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database.cs" />
+    <Compile Include="DatabaseImpl.cs" />
     <Compile Include="IzvjestajOArtiklima.cs" />
     <Compile Include="KorisnikDatabase.cs" />
     <Compile Include="LoginFrm.cs">

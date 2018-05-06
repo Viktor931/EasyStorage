@@ -5,7 +5,7 @@ namespace EasyStorage
 {
     public partial class PrikazDugovanja : Form
     {
-        private MainDatabase database = DatabaseImpl.GetMainDatabase();
+        private MainDatabase database = Program.GetMainDatabase();
         private DataTable popisPromjena;
         private int selektiranRed = -1;
         private int SelektiranRed

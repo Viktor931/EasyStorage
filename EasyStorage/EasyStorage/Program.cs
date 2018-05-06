@@ -15,5 +15,13 @@ namespace EasyStorage
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginFrm());
         }
+        public static MainDatabase GetMainDatabase()
+        {
+            return DatabaseImpl.GetDatabase();
+        }
+        public static KorisnikDatabase GetKorisnikDatabase()
+        {
+            return DatabaseImpl.GetDatabase();
+        }
     }
 }
